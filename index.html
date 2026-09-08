@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handwerksbetrieb – Demoseite</title>
+  <meta name="description" content="Handwerk aus einer Hand: Reparatur, Wartung, Sanierung und Neubau. Anfrage rund um die Uhr – auch über den digitalen Assistenten.">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+
+<!-- ============================ Kopfzeile ============================ -->
+<header class="kopf">
+  <div class="wrap kopf__inhalt">
+    <a class="logo" href="#top">
+      <span class="logo__mark">MH</span>
+      <span data-cfg="firma.name">Muster Handwerk</span>
+    </a>
+    <button class="kopf__burger" id="burger" aria-label="Menü">☰</button>
+    <nav class="nav" id="nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#referenzen">Referenzen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="kopf__tel" href="#" data-tel>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 1.9.6 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.1a2 2 0 012.1-.5c.9.3 1.8.5 2.8.6a2 2 0 011.7 2z"/></svg>
+      <span data-cfg="kontakt.telefon">07431 123456</span>
+    </a>
+  </div>
+</header>
+
+<!-- ============================== Hero ============================== -->
+<section class="hero" id="top">
+  <div class="wrap hero__raster">
+    <div>
+      <span class="hero__badge"><i class="punkt"></i> Anfragen rund um die Uhr möglich</span>
+      <h1 data-cfg="firma.claim">Handwerk, auf das Sie sich verlassen können</h1>
+      <p class="hero__lead">
+        Reparatur, Wartung, Sanierung und Neubau – aus einer Hand, mit festen Ansprechpartnern
+        und Terminen, auf die Sie sich einstellen können.
+      </p>
+      <div class="hero__aktionen">
+        <button class="btn btn--primaer" data-chat-oeffnen>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 8.6 8.6 0 01-3.9-.9L3 21l1.9-5a8.4 8.4 0 01-.9-3.9 8.4 8.4 0 018.4-8.4h.5A8.4 8.4 0 0121 11.5z"/></svg>
+          Frage stellen oder Termin buchen
+        </button>
+        <a class="btn btn--linie" href="#" data-tel>Anrufen</a>
+      </div>
+    </div>
+    <div class="hero__bild">
+      <img id="hero-bild" src="assets/img/hero.svg" alt="Handwerksbetrieb">
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Zahlenleiste ======================== -->
+<div class="wrap">
+  <div class="fakten" id="fakten"></div>
+</div>
+
+<!-- ============================ Leistungen ========================== -->
+<section class="abschnitt abschnitt--hell" id="leistungen">
+  <div class="wrap">
+    <div class="kopfzeile-block">
+      <span class="kicker">Leistungen</span>
+      <h2>Das übernehmen wir für Sie</h2>
+      <p class="lead">Von der schnellen Reparatur bis zum kompletten Projekt – sprechen Sie uns an,
+        auch wenn Sie noch nicht sicher sind, was nötig ist.</p>
+    </div>
+    <div class="raster" id="leistungen-raster"></div>
+  </div>
+</section>
+
+<!-- ============================== Ablauf ============================ -->
+<section class="abschnitt" id="ablauf">
+  <div class="wrap">
+    <div class="kopfzeile-block">
+      <span class="kicker">Ablauf</span>
+      <h2>In drei Schritten zum Termin</h2>
+    </div>
+    <div class="schritte" id="ablauf-schritte"></div>
+  </div>
+</section>
+
+<!-- ============================= Über uns =========================== -->
+<section class="abschnitt abschnitt--hell" id="ueber-uns">
+  <div class="wrap ueber-raster">
+    <img id="ueber-bild" src="assets/img/werkstatt.svg" alt="Unser Betrieb">
+    <div>
+      <span class="kicker">Über uns</span>
+      <h2 data-cfg="ueberUns.ueberschrift">Ein Betrieb, viele Hände – und ein Anspruch</h2>
+      <p class="lead" data-cfg="ueberUns.text"></p>
+      <ul class="haken" id="ueber-punkte"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Referenzen ========================== -->
+<section class="abschnitt" id="referenzen">
+  <div class="wrap">
+    <div class="kopfzeile-block">
+      <span class="kicker">Referenzen</span>
+      <h2>Ausgewählte Projekte</h2>
+    </div>
+    <div class="raster" id="referenzen-raster"></div>
+  </div>
+</section>
+
+<!-- ============================== Stimmen =========================== -->
+<section class="abschnitt abschnitt--dunkel">
+  <div class="wrap">
+    <span class="kicker">Kundenstimmen</span>
+    <h2>Was unsere Kunden sagen</h2>
+    <div class="stimmen" id="stimmen-raster"></div>
+  </div>
+</section>
+
+<!-- ============================= Notdienst ========================== -->
+<section class="abschnitt" id="notdienst">
+  <div class="wrap">
+    <div class="notdienst">
+      <div>
+        <h3>Notdienst außerhalb der Öffnungszeiten</h3>
+        <p>Schaden, der nicht warten kann? Rufen Sie direkt an – wir sind erreichbar.</p>
+      </div>
+      <a class="btn btn--primaer" href="#" data-tel-notdienst>
+        <span data-cfg="kontakt.notdienst">0172 1234567</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ FAQ ============================= -->
+<section class="abschnitt abschnitt--hell">
+  <div class="wrap">
+    <div class="kopfzeile-block">
+      <span class="kicker">Häufige Fragen</span>
+      <h2>Kurz beantwortet</h2>
+      <p class="lead">Ihre Frage ist nicht dabei? Der Assistent unten rechts antwortet rund um die Uhr.</p>
+    </div>
+    <div class="faq" id="faq-liste"></div>
+  </div>
+</section>
+
+<!-- ============================== Kontakt =========================== -->
+<section class="abschnitt" id="kontakt">
+  <div class="wrap">
+    <div class="kopfzeile-block">
+      <span class="kicker">Kontakt</span>
+      <h2>Anfrage stellen</h2>
+      <p class="lead">Schreiben Sie uns – oder buchen Sie den Termin direkt im Chat.</p>
+    </div>
+
+    <div class="kontakt-raster">
+      <div>
+        <div class="info-zeile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 1.9.6 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.1a2 2 0 012.1-.5c.9.3 1.8.5 2.8.6a2 2 0 011.7 2z"/></svg>
+          <div><b>Telefon</b><a href="#" data-tel><span data-cfg="kontakt.telefon"></span></a></div>
+        </div>
+        <div class="info-zeile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 6 8-6"/></svg>
+          <div><b>E-Mail</b><a href="#" data-mail><span data-cfg="kontakt.email"></span></a></div>
+        </div>
+        <div class="info-zeile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <b>Anschrift</b>
+            <span data-cfg="kontakt.strasse"></span>,
+            <span data-cfg="kontakt.plz"></span> <span data-cfg="kontakt.stadt"></span>
+          </div>
+        </div>
+        <div class="info-zeile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div style="flex:1">
+            <b>Öffnungszeiten</b>
+            <ul class="zeiten" id="oeffnungszeiten"></ul>
+          </div>
+        </div>
+        <div class="info-zeile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18a15 15 0 010-18"/></svg>
+          <div><b>Einsatzgebiet</b><span data-cfg="kontakt.einsatzgebiet"></span></div>
+        </div>
+      </div>
+
+      <form id="kontaktformular">
+        <div class="feld">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="Name" required autocomplete="name">
+        </div>
+        <div class="feld">
+          <label for="f-kontakt">Telefon oder E-Mail</label>
+          <input id="f-kontakt" name="Kontakt" required autocomplete="tel">
+        </div>
+        <div class="feld">
+          <label for="formular-leistung">Worum geht es?</label>
+          <select id="formular-leistung" name="Leistung">
+            <option value="">Bitte wählen</option>
+          </select>
+        </div>
+        <div class="feld">
+          <label for="f-text">Ihre Nachricht</label>
+          <textarea id="f-text" name="Nachricht" placeholder="Beschreiben Sie kurz, worum es geht."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primaer">Anfrage senden</button>
+        <p class="form-hinweis">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung
+          der Anfrage zu. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+        <p class="form-status" id="formular-status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== Fußzeile ========================== -->
+<footer class="fuss">
+  <div class="wrap">
+    <div class="fuss__raster">
+      <div>
+        <h4>Betrieb</h4>
+        <p><strong data-cfg="firma.name"></strong> <span data-cfg="firma.rechtsform"></span><br>
+          <span data-cfg="kontakt.strasse"></span><br>
+          <span data-cfg="kontakt.plz"></span> <span data-cfg="kontakt.stadt"></span></p>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="#" data-tel><span data-cfg="kontakt.telefon"></span></a></li>
+          <li><a href="#" data-mail><span data-cfg="kontakt.email"></span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fuss__unten">
+      <span>© <span data-jahr></span> <span data-cfg="firma.name"></span></span>
+      <span>Demoseite – Inhalte sind Platzhalter</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ Chat-Widget ========================= -->
+<button class="chat-knopf" id="chat-knopf">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 8.6 8.6 0 01-3.9-.9L3 21l1.9-5a8.4 8.4 0 01-.9-3.9 8.4 8.4 0 018.4-8.4h.5A8.4 8.4 0 0121 11.5z"/></svg>
+  <span id="chat-knopf-text">Frage stellen</span>
+  <i class="chat-knopf__ping"></i>
+</button>
+
+<div class="chat" id="chat" hidden>
+  <div class="chat__kopf">
+    <div class="chat__avatar" id="chat-avatar">M</div>
+    <div>
+      <strong id="chat-titel">Ihr Ansprechpartner</strong>
+      <span id="chat-untertitel">Fragen &amp; Termine</span>
+    </div>
+    <button class="chat__zu" id="chat-zu" aria-label="Chat schließen">×</button>
+  </div>
+  <div class="chat__verlauf" id="chat-verlauf"></div>
+  <div class="chat__vorschlaege" id="chat-vorschlaege"></div>
+  <div class="chat__eingabe">
+    <textarea id="chat-eingabe" rows="1" placeholder="Ihre Frage ..."></textarea>
+    <button class="chat__senden" id="chat-senden" aria-label="Senden">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </div>
+  <p class="chat__fuss">Der Assistent kann Termine direkt einbuchen. Bei dringenden Fällen bitte anrufen.</p>
+</div>
+
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
