@@ -146,6 +146,37 @@ window.BETRIEB = {
     launcherText: "Frage stellen",
   },
 
+  /* --- 11b. Testfälle für den Assistenten --------------------------------- *
+   * Drei Klick-Beispiele auf der Seite: ein Klick schickt die Frage direkt an
+   * den Assistenten. Gedacht für die Demo beim Kunden.
+   * aktiv: false  →  der ganze Abschnitt verschwindet (für die Live-Seite
+   * des Betriebs, wo Besucher keine "Testfälle" sehen sollen).              */
+  demo: {
+    aktiv: true,
+    ueberschrift: "Probieren Sie den Assistenten aus",
+    text: "Drei typische Situationen – ein Klick genügt, der Assistent antwortet sofort.",
+    faelle: [
+      {
+        icon: "frage",
+        titel: "Auskunft zur Leistung",
+        text: "Der Assistent antwortet nur aus der hinterlegten Wissensbasis – er erfindet nichts.",
+        frage: "Was genau gehört bei Ihnen zu Reparatur und Wartung, und was kostet ein Einsatz?",
+      },
+      {
+        icon: "kalender",
+        titel: "Termin buchen",
+        text: "Er fragt die nötigen Angaben ab, prüft den Kalender und trägt den Termin ein.",
+        frage: "Ich hätte gerne einen Termin zur Beratung vor Ort, am besten nächste Woche vormittags.",
+      },
+      {
+        icon: "warnung",
+        titel: "Notfall erkennen",
+        text: "Bei einem Notfall bucht er bewusst keinen Termin, sondern verweist auf den Notdienst.",
+        frage: "Bei mir läuft Wasser aus der Wand, was soll ich tun?",
+      },
+    ],
+  },
+
   /* --- 12. Kontaktformular ------------------------------------------------ *
    * Ohne eigenen Endpunkt oeffnet das Formular eine vorbereitete E-Mail.
    * Alternativ: n8n-Webhook-URL eintragen.                                   */
