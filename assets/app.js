@@ -33,7 +33,10 @@
     wasser: '<path d="M12 3s6 6.4 6 10.4A6 6 0 016 13.4C6 9.4 12 3 12 3z"/>',
     flamme: '<path d="M12 22a6 6 0 006-6c0-5-6-10-6-10S6 11 6 16a6 6 0 006 6zM12 22a3 3 0 003-3c0-2-3-4-3-4s-3 2-3 4a3 3 0 003 3z"/>',
     blitz: '<path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>',
-    pinsel: '<path d="M4 20l4-1 9-9-3-3-9 9-1 4zM14 5l3-3 3 3-3 3"/>'
+    pinsel: '<path d="M4 20l4-1 9-9-3-3-9 9-1 4zM14 5l3-3 3 3-3 3"/>',
+    frage: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 115 .5c0 1.5-2.5 2-2.5 3.5M12 17h.01"/>',
+    kalender: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/>',
+    warnung: '<path d="M10.3 4.3L2.8 17a2 2 0 001.7 3h15a2 2 0 001.7-3L13.7 4.3a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/>'
   };
   function iconSvg(name) {
     var d = ICONS[name] || ICONS.werkzeug;
@@ -108,6 +111,34 @@
         Chat.oeffnen("Ich habe eine Frage zum Thema " + l.titel + ": ");
       });
       $(".karte__inhalt", karte).appendChild(frage);
+      ziel.appendChild(karte);
+    });
+  }
+
+  /* Drei Klick-Beispiele: ein Klick schickt die Frage direkt an den Assistenten. */
+  function testfaelleBauen() {
+    var abschnitt = $("#demo");
+    if (!abschnitt) return;
+    if (!C.demo || C.demo.aktiv === false) {
+      abschnitt.remove();
+      $$('a[href="#demo"]').forEach(function (a) { a.remove(); });
+      return;
+    }
+
+    $("#demo-ueberschrift").textContent = C.demo.ueberschrift;
+    $("#demo-text").textContent = C.demo.text;
+
+    var ziel = $("#demo-raster");
+    (C.demo.faelle || []).forEach(function (f) {
+      var karte = el("button", "demo-karte");
+      karte.type = "button";
+      karte.innerHTML =
+        '<div class="demo-karte__icon">' + iconSvg(f.icon) + "</div>" +
+        "<h3>" + escapeHtml(f.titel) + "</h3>" +
+        "<p>" + escapeHtml(f.text) + "</p>" +
+        '<div class="demo-karte__frage">„' + escapeHtml(f.frage) + '"</div>' +
+        '<div class="demo-karte__start">Im Chat stellen →</div>';
+      karte.addEventListener("click", function () { Chat.frageStellen(f.frage); });
       ziel.appendChild(karte);
     });
   }
@@ -382,7 +413,14 @@
       knopf.hidden = false;
     }
 
-    return { aufbauen: aufbauen, oeffnen: oeffnen, schliessen: schliessen };
+    // Chat oeffnen und die Frage sofort abschicken (Testfall-Kacheln)
+    function frageStellen(text) {
+      oeffnen();
+      setTimeout(function () { abschicken(text); }, 120);
+    }
+
+    return { aufbauen: aufbauen, oeffnen: oeffnen, schliessen: schliessen,
+             frageStellen: frageStellen };
   })();
 
   /* --------------------------------------------------------------- Start */
@@ -391,6 +429,7 @@
     texteFuellen();
     leistungenBauen();
     listenBauen();
+    testfaelleBauen();
     formularAktivieren();
     navAktivieren();
     Chat.aufbauen();
