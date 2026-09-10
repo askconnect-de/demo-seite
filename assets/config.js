@@ -146,6 +146,14 @@ window.BETRIEB = {
     launcherText: "Frage stellen",
   },
 
+   demo: {
+    aktiv: true,
+    ueberschrift: "Probieren Sie den Assistenten aus",
+    text: "Drei typische Situationen – ein Klick genügt, der Assistent antwortet sofort.",
+    faelle: [ … drei Einträge … ],
+  },
+
+
   /* --- 12. Kontaktformular ------------------------------------------------ *
    * Ohne eigenen Endpunkt oeffnet das Formular eine vorbereitete E-Mail.
    * Alternativ: n8n-Webhook-URL eintragen.                                   */
