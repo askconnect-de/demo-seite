@@ -1,291 +1,498 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Handwerksbetrieb – Demoseite</title>
-  <meta name="description" content="Handwerk aus einer Hand: Reparatur, Wartung, Sanierung und Neubau. Anfrage rund um die Uhr – auch über den digitalen Assistenten.">
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="icon" href="data:,">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muster Handwerk – Demo mit KI-Assistent | ASK Connect</title>
+<meta name="description" content="Demo einer Handwerker-Website mit KI-Assistent: beantwortet Kundenfragen und bucht Termine – rund um die Uhr, auch wenn alle auf der Baustelle sind.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F172A'/><path d='M60 24l16 16-12 12-16-16z' fill='%232563EB'/><path d='M52 44 24 72a8 8 0 0 0 11 11l28-28z' fill='%232563EB'/><path d='M46 20 66 40' stroke='%232563EB' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 
-<!-- ============================ Kopfzeile ============================ -->
-<header class="kopf">
-  <div class="wrap kopf__inhalt">
-    <a class="logo" href="#top">
-      <span class="logo__mark">MH</span>
-      <span data-cfg="firma.name">Muster Handwerk</span>
+<!-- ═══════════ Demo-Hinweis ═══════════ -->
+<div class="demobar">
+  <b>Demo-Website</b><span class="dbfull"> · Der Betrieb ist erfunden – der Assistent ist echt.</span>
+  <span class="pin"></span><b>Alles blau Markierte</b> liefert <span id="txt-anbieter">ASK Connect</span>.
+</div>
+
+<!-- ═══════════ Kopfzeile ═══════════ -->
+<header class="top">
+  <div class="wrap topin">
+    <a class="brand" href="#start">
+      <span class="bmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 6.5 3-3 4 4-3 3z"/><path d="m13 8-9.2 9.2a2 2 0 0 0 0 2.8 2 2 0 0 0 2.8 0L16 10.5"/><path d="m11.5 5 4.5 4.5"/></svg></span>
+      <span><span class="bname">Muster Handwerk</span><br><span class="bsub">Meisterbetrieb seit 2004</span></span>
     </a>
-    <button class="kopf__burger" id="burger" aria-label="Menü">☰</button>
-    <nav class="nav" id="nav">
+
+    <nav class="nav" data-nav>
+      <a href="#start">Start</a>
       <a href="#leistungen">Leistungen</a>
-      <a href="#ablauf">Ablauf</a>
-      <a href="#demo">Assistent testen</a>
-      <a href="#ueber-uns">Über uns</a>
-      <a href="#referenzen">Referenzen</a>
+      <a href="#aktion" class="ki">In Aktion</a>
+      <a href="#assistent" class="ki">Use Cases</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
-    <a class="kopf__tel" href="#" data-tel>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 1.9.6 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.1a2 2 0 012.1-.5c.9.3 1.8.5 2.8.6a2 2 0 011.7 2z"/></svg>
-      <span data-cfg="kontakt.telefon">07431 123456</span>
-    </a>
+
+    <div class="tcta">
+      <label class="tog" data-marks title="Blaue Markierungen ein- und ausblenden">
+        <input type="checkbox" checked>
+        <span class="togsw"></span>
+        <span class="togtxt">Markierungen</span>
+      </label>
+      <a class="btn b-pri tbtn" href="#fuer-betriebe"><span class="tbtnlang">Für </span>Betriebe</a>
+    </div>
   </div>
 </header>
 
-<!-- ============================== Hero ============================== -->
-<section class="hero" id="top">
-  <div class="wrap hero__raster">
-    <div>
-      <span class="hero__badge"><i class="punkt"></i> Anfragen rund um die Uhr möglich</span>
-      <h1 data-cfg="firma.claim">Handwerk, auf das Sie sich verlassen können</h1>
-      <p class="hero__lead">
-        Reparatur, Wartung, Sanierung und Neubau – aus einer Hand, mit festen Ansprechpartnern
-        und Terminen, auf die Sie sich einstellen können.
+<!-- Ankerleiste fürs Handy -->
+<nav class="pills" data-nav>
+  <a href="#start">Start</a>
+  <a href="#leistungen">Leistungen</a>
+  <a href="#aktion" class="ki">⚡ In Aktion</a>
+  <a href="#assistent" class="ki">Use Cases</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="#fuer-betriebe">Für Betriebe</a>
+</nav>
+
+<!-- ═══════════ 1 · HERO mit Live-Chat ═══════════ -->
+<div class="hero" id="start">
+  <div class="herobg">
+    <img src="https://images.unsplash.com/photo-1426927308491-6380b6a9936f?auto=format&fit=crop&w=1700&q=75"
+         alt="Werkzeugwand im Betrieb" fetchpriority="high">
+  </div>
+  <div class="wrap heroin">
+
+    <div class="herotxt">
+      <div class="hbadges">
+        <span class="hbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Meisterbetrieb seit 2004</span>
+        <span class="hbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Notdienst rund um die Uhr</span>
+      </div>
+
+      <h1>Ein Ansprechpartner.<br><em>Alle Gewerke.</em></h1>
+
+      <p>
+        <span class="nur-gross">Sanitär, Heizung, Elektro und Sanierung in Musterstadt – mit
+          <strong style="color:#fff">einem Assistenten, der auch um halb zwölf nachts
+          noch Termine vergibt.</strong></span>
+        <span class="nur-klein">Handwerk aus einer Hand in Musterstadt – mit
+          <strong style="color:#fff">einem Assistenten, der auch nachts noch
+          Termine vergibt.</strong></span>
       </p>
-      <div class="hero__aktionen">
-        <button class="btn btn--primaer" data-chat-oeffnen>
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 8.6 8.6 0 01-3.9-.9L3 21l1.9-5a8.4 8.4 0 01-.9-3.9 8.4 8.4 0 018.4-8.4h.5A8.4 8.4 0 0121 11.5z"/></svg>
-          Frage stellen oder Termin buchen
-        </button>
-        <a class="btn btn--linie" href="#" data-tel>Anrufen</a>
-      </div>
-    </div>
-    <div class="hero__bild">
-      <img id="hero-bild" src="assets/img/hero.svg" alt="Handwerksbetrieb">
-    </div>
-  </div>
-</section>
 
-<!-- ============================ Zahlenleiste ======================== -->
-<div class="wrap">
-  <div class="fakten" id="fakten"></div>
-</div>
-
-<!-- ============================ Leistungen ========================== -->
-<section class="abschnitt abschnitt--hell" id="leistungen">
-  <div class="wrap">
-    <div class="kopfzeile-block">
-      <span class="kicker">Leistungen</span>
-      <h2>Das übernehmen wir für Sie</h2>
-      <p class="lead">Von der schnellen Reparatur bis zum kompletten Projekt – sprechen Sie uns an,
-        auch wenn Sie noch nicht sicher sind, was nötig ist.</p>
-    </div>
-    <div class="raster" id="leistungen-raster"></div>
-  </div>
-</section>
-
-<!-- ============================== Ablauf ============================ -->
-<section class="abschnitt" id="ablauf">
-  <div class="wrap">
-    <div class="kopfzeile-block">
-      <span class="kicker">Ablauf</span>
-      <h2>In drei Schritten zum Termin</h2>
-    </div>
-    <div class="schritte" id="ablauf-schritte"></div>
-  </div>
-</section>
-
-<!-- ======================== Assistent testen ======================== -->
-<section class="abschnitt abschnitt--dunkel" id="demo">
-  <div class="wrap">
-    <div class="kopfzeile-block">
-      <span class="kicker">Digitaler Assistent</span>
-      <h2 id="demo-ueberschrift">Probieren Sie den Assistenten aus</h2>
-      <p class="lead" id="demo-text"></p>
-    </div>
-    <div class="raster" id="demo-raster"></div>
-  </div>
-</section>
-
-<!-- ============================= Über uns =========================== -->
-<section class="abschnitt abschnitt--hell" id="ueber-uns">
-  <div class="wrap ueber-raster">
-    <img id="ueber-bild" src="assets/img/werkstatt.svg" alt="Unser Betrieb">
-    <div>
-      <span class="kicker">Über uns</span>
-      <h2 data-cfg="ueberUns.ueberschrift">Ein Betrieb, viele Hände – und ein Anspruch</h2>
-      <p class="lead" data-cfg="ueberUns.text"></p>
-      <ul class="haken" id="ueber-punkte"></ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ Referenzen ========================== -->
-<section class="abschnitt" id="referenzen">
-  <div class="wrap">
-    <div class="kopfzeile-block">
-      <span class="kicker">Referenzen</span>
-      <h2>Ausgewählte Projekte</h2>
-    </div>
-    <div class="raster" id="referenzen-raster"></div>
-  </div>
-</section>
-
-<!-- ============================== Stimmen =========================== -->
-<section class="abschnitt abschnitt--dunkel">
-  <div class="wrap">
-    <span class="kicker">Kundenstimmen</span>
-    <h2>Was unsere Kunden sagen</h2>
-    <div class="stimmen" id="stimmen-raster"></div>
-  </div>
-</section>
-
-<!-- ============================= Notdienst ========================== -->
-<section class="abschnitt" id="notdienst">
-  <div class="wrap">
-    <div class="notdienst">
-      <div>
-        <h3>Notdienst außerhalb der Öffnungszeiten</h3>
-        <p>Schaden, der nicht warten kann? Rufen Sie direkt an – wir sind erreichbar.</p>
-      </div>
-      <a class="btn btn--primaer" href="#" data-tel-notdienst>
-        <span data-cfg="kontakt.notdienst">0172 1234567</span>
+      <a class="htel" href="#" data-tel>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        <span id="txt-tel">07431 987650</span>
       </a>
     </div>
+
+    <!-- ► Der Eyecatcher: echter Chat, direkt sichtbar -->
+    <div class="kizone">
+      <span class="kiflag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> Hier läuft der KI-Assistent</span>
+      <div id="chat-hero"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════ 2 · LEISTUNGEN ═══════════ -->
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sechead mid">
+      <span class="eyebrow">Leistungen</span>
+      <h2>Was wir für Sie übernehmen</h2>
+      <p>
+        Und jetzt das Entscheidende: Unter jeder Leistung steht eine fertige Frage.
+        Ein Klick – der Assistent beantwortet sie sofort.
+        <strong style="color:var(--ac6)">Probieren Sie es aus.</strong>
+      </p>
+    </div>
+
+    <div class="grid g3" id="leistungs-grid"></div>
+
+    <p class="weitere" id="txt-weitere"></p>
   </div>
 </section>
 
-<!-- ================================ FAQ ============================= -->
-<section class="abschnitt abschnitt--hell">
+<!-- ═══════════ 3 · DER ASSISTENT IN AKTION ═══════════ -->
+<section id="aktion" class="bg2">
   <div class="wrap">
-    <div class="kopfzeile-block">
-      <span class="kicker">Häufige Fragen</span>
-      <h2>Kurz beantwortet</h2>
-      <p class="lead">Ihre Frage ist nicht dabei? Der Assistent unten rechts antwortet rund um die Uhr.</p>
+
+    <div class="sechead mid">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> Der Assistent in Aktion</span>
+      <h2>Von der Frage zum Eintrag im Kalender</h2>
+      <p>
+        Links schreibt ein Kunde, rechts füllt sich Ihr Kalender – ohne dass im Büro
+        jemand den Hörer abnimmt. Wählen Sie, welchen Ablauf Sie sehen möchten.
+      </p>
     </div>
-    <div class="faq" id="faq-liste"></div>
+
+    <div class="sz-tabs" role="tablist" aria-label="Ablauf auswählen"></div>
+
+    <div class="buehne kizone" id="demo-buehne">
+
+      <span class="kiflag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> Läuft automatisch</span>
+
+      <div class="buehne-in">
+        <!-- Kundensicht -->
+        <div class="bseite">
+          <span class="bseite-titel">Was Ihr Kunde sieht</span>
+          <div class="bphone">
+            <div class="bphone-screen">
+              <div class="bchat-head">
+                <span class="bchat-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg></span>
+                <span><b>Handwerks-Assistent</b><span><i class="dotlive"></i>online</span></span>
+              </div>
+              <div class="bchat-log"></div>
+              <div class="bchat-foot"><span class="bchat-feld">Nachricht schreiben …</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Verbindung -->
+        <div class="bpfeil" aria-hidden="true">
+          <span class="bpfeil-linie"></span>
+          <span class="bpfeil-chip">automatisch</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+
+        <!-- Betriebssicht -->
+        <div class="bseite">
+          <span class="bseite-titel">Was bei Ihnen ankommt</span>
+          <div class="bkal"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="sz-note"></p>
+
   </div>
 </section>
 
-<!-- ============================== Kontakt =========================== -->
-<section class="abschnitt" id="kontakt">
+<!-- ═══════════ 4 · USE CASES (unser Produkt) ═══════════ -->
+<section id="assistent" class="dark">
   <div class="wrap">
-    <div class="kopfzeile-block">
-      <span class="kicker">Kontakt</span>
-      <h2>Anfrage stellen</h2>
-      <p class="lead">Schreiben Sie uns – oder buchen Sie den Termin direkt im Chat.</p>
+
+    <div class="sechead mid">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> Das liefern wir</span>
+      <h2>Ein Assistent, der Ihren Betrieb kennt</h2>
+      <p style="color:#A9B4C2">
+        Er liest keine Website vor. Er kennt Ihre Stundensätze, Ihre Terminarten, Ihr
+        Einsatzgebiet und Ihren Kalender – und macht aus einer Frage um 21:47 Uhr
+        einen Termin um 21:49 Uhr.
+      </p>
     </div>
 
-    <div class="kontakt-raster">
-      <div>
-        <div class="info-zeile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 1.9.6 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.1a2 2 0 012.1-.5c.9.3 1.8.5 2.8.6a2 2 0 011.7 2z"/></svg>
-          <div><b>Telefon</b><a href="#" data-tel><span data-cfg="kontakt.telefon"></span></a></div>
-        </div>
-        <div class="info-zeile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 6 8-6"/></svg>
-          <div><b>E-Mail</b><a href="#" data-mail><span data-cfg="kontakt.email"></span></a></div>
-        </div>
-        <div class="info-zeile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div>
-            <b>Anschrift</b>
-            <span data-cfg="kontakt.strasse"></span>,
-            <span data-cfg="kontakt.plz"></span> <span data-cfg="kontakt.stadt"></span>
+    <!-- Use Case 1 -->
+    <div class="uc-trenner">
+      <span class="uc-marke"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Use Case 01</b><i>Website &amp; WhatsApp</i></span>
+    </div>
+    <div class="bst">
+      <div class="bstdemo rv">
+        <div class="phone" id="demo-wa">
+          <div class="pscreen">
+            <div class="pstat" style="background:#075E54"><span>21:49</span><span>▮▮▮ 84 %</span></div>
+            <div class="wahead">
+              <span class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 6.5 3-3 4 4-3 3z"/><path d="m13 8-9.2 9.2a2 2 0 0 0 0 2.8 2 2 0 0 0 2.8 0L16 10.5"/><path d="m11.5 5 4.5 4.5"/></svg></span>
+              <span><b>Muster Handwerk</b><span>online</span></span>
+            </div>
+            <div class="wabody"></div>
+            <div class="wafoot">
+              <span class="wain">Nachricht</span>
+              <span class="wamic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10.5a7 7 0 0 0 14 0M12 17.5V21"/></svg></span>
+            </div>
           </div>
         </div>
-        <div class="info-zeile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <div style="flex:1">
-            <b>Öffnungszeiten</b>
-            <ul class="zeiten" id="oeffnungszeiten"></ul>
-          </div>
+      </div>
+
+      <div class="rv">
+        <h3>Erreichbar, während Sie auf der Baustelle sind</h3>
+        <p>
+          Rund zwei Drittel aller Anfragen kommen abends, am Wochenende oder mitten am
+          Vormittag – also genau dann, wenn niemand im Büro sitzt und alle Monteure
+          unterwegs sind. Wer Sie nicht erreicht, ruft den nächsten Betrieb in der Liste an.
+        </p>
+        <div class="wins">
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <span><b>Antwort in Sekunden, 24/7</b><span>Auf Ihrer Website und auf WhatsApp – derselbe Assistent.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+            <span><b>Bucht in Ihren Google Kalender</b><span>Mit Einsatzadresse, Anliegen und Telefonnummer – vollständig, nicht als Zettel mit halben Angaben.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <span><b>Er erfindet keine Preise</b><span>Für ein neues Bad nennt er keine Pauschale, sondern schlägt ein Aufmaß vor. Antworten kommen nur aus Ihrer Wissensbasis.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.6 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+            <span><b>Bei Notfällen tritt er zurück</b><span>Wasseraustritt oder Gasgeruch: Er nennt sofort Ihre Notdienstnummer, statt einen Termin in drei Tagen zu buchen.</span></span></div>
         </div>
-        <div class="info-zeile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18a15 15 0 010-18"/></svg>
-          <div><b>Einsatzgebiet</b><span data-cfg="kontakt.einsatzgebiet"></span></div>
+        <p class="small mut" style="margin-top:16px">
+          Der WhatsApp-Verlauf oben ist nachgestellt. Den Website-Assistenten können Sie
+          oben im Chatfenster wirklich ausprobieren.
+        </p>
+      </div>
+    </div>
+
+    <!-- Use Case 2 · der Umsatz-Use-Case, bewusst in der Mitte -->
+    <div class="uc-trenner">
+      <span class="uc-marke"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Use Case 02</b><i>Angebot direkt vor Ort</i></span>
+    </div>
+    <div class="bst rev">
+      <div class="bstdemo rv">
+        <div class="flow" id="demo-flow">
+          <div class="flowhead">
+            <span class="lt"></span><span>Angebotskalkulator · beim Kunden</span><span class="cnt">–</span>
+          </div>
+          <div class="flowbody"></div>
+          <div class="flowfoot">
+            <span><b class="euro">0 €</b><span>Angebot, live im Vorgarten gerechnet</span></span>
+            <button class="replay" type="button">Nochmal</button>
+          </div>
         </div>
       </div>
 
-      <form id="kontaktformular">
-        <div class="feld">
-          <label for="f-name">Name</label>
-          <input id="f-name" name="Name" required autocomplete="name">
+      <div class="rv">
+        <h3>Der Preis steht, bevor Sie wieder im Auto sitzen</h3>
+        <p>
+          Sie stehen beim Kunden, er erzählt, was er will – und Sie sagen: „Ich schick
+          Ihnen was zusammen." Bis das Angebot geschrieben ist, vergehen Tage. In der
+          Zwischenzeit war ein anderer da. <strong style="color:#fff">Hier sprechen Sie
+          die Maße ins Handy und haben den Preis, während der Kunde noch danebensteht.</strong>
+        </p>
+        <div class="wins">
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7 13.5 15.5l-4-4L2 19"/><path d="M16 7h6v6"/></svg></span>
+            <span><b>Rechnen Sie es für sich durch</b><span>120 Aufmaßtermine im Jahr, Ø 4.200 € Auftragswert. Wer beim Termin einen Preis nennt, gewinnt erfahrungsgemäß deutlich öfter – zehn Prozentpunkte mehr sind rund 50.000 € im Jahr.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg></span>
+            <span><b>Er schätzt nicht, er schlägt nach</b><span>Für Sonderteile liest er mehrere echte Anbieterseiten, bildet Median und Spanne – statt sich eine Zahl auszudenken.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg></span>
+            <span><b>Jede Quelle wird protokolliert</b><span>Alle verwendeten Links landen im Angebotsordner. Abends am Rechner sehen Sie, woher jede Zahl stammt, und können sie vor der Abgabe korrigieren.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.34.4.62.73.79H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+            <span><b>Ihre Werte, nicht unsere</b><span>Stundensatz, Marge, Aufschläge und Ihre Standardpositionen sind hinterlegt. Der Kalkulator rechnet damit – nicht mit Durchschnittswerten aus dem Internet.</span></span></div>
         </div>
-        <div class="feld">
-          <label for="f-kontakt">Telefon oder E-Mail</label>
-          <input id="f-kontakt" name="Kontakt" required autocomplete="tel">
+        <p class="small mut" style="margin-top:16px">
+          Diesen Kalkulator haben wir für einen Zaunbaubetrieb bereits gebaut. Die
+          Abschlussquoten oben sind Erfahrungswerte, keine Garantie.
+        </p>
+      </div>
+    </div>
+
+    <!-- Use Case 3 -->
+    <div class="uc-trenner">
+      <span class="uc-marke"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Use Case 03</b><i>Social-Media-Autopilot</i></span>
+    </div>
+    <div class="bst">
+      <div class="bstdemo rv">
+        <div class="phone" id="demo-ig">
+          <div class="pscreen">
+            <div class="pstat" style="background:#fff;color:#262626"><span>09:12</span><span>▮▮▮ 71 %</span></div>
+            <div class="ighead">
+              <span class="iglogo">Instagram</span>
+              <span class="sp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+              </span>
+            </div>
+            <div class="igfeed"><div class="igtrack"></div></div>
+          </div>
         </div>
-        <div class="feld">
-          <label for="formular-leistung">Worum geht es?</label>
-          <select id="formular-leistung" name="Leistung">
-            <option value="">Bitte wählen</option>
-          </select>
+      </div>
+
+      <div class="rv">
+        <h3>Ein Profil, das lebt</h3>
+        <p>
+          Fast jeder Betrieb hat einen Instagram-Account, auf dem der letzte Beitrag aus
+          dem vorletzten Sommer stammt. Kein Faulheitsproblem – abends um acht, nach elf
+          Stunden auf der Baustelle, setzt sich niemand hin und textet Bildunterschriften.
+        </p>
+        <div class="wins">
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 13.9 9l6.2 1.9-6.2 1.9L12 19l-1.9-6.2L3.9 10.9 10.1 9z"/></svg></span>
+            <span><b>Ein Foto von der Baustelle genügt</b><span>Bild per WhatsApp an eine Nummer – Text, Hashtags und Veröffentlichung laufen automatisch.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.2-6.5L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.2 6.5L3 16"/><path d="M3 21v-5h5"/></svg></span>
+            <span><b>Saisonthemen kommen von allein</b><span>September Heizungscheck, nach dem Sturm das Dach, im Frühjahr das Bad.</span></span></div>
+          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <span><b>Sie geben frei, bevor etwas online geht</b><span>Jeder Beitrag landet zuerst als Entwurf bei Ihnen – kein Foto einer fremden Baustelle geht ungefragt raus.</span></span></div>
         </div>
-        <div class="feld">
-          <label for="f-text">Ihre Nachricht</label>
-          <textarea id="f-text" name="Nachricht" placeholder="Beschreiben Sie kurz, worum es geht."></textarea>
-        </div>
-        <button type="submit" class="btn btn--primaer">Anfrage senden</button>
-        <p class="form-hinweis">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung
-          der Anfrage zu. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-        <p class="form-status" id="formular-status"></p>
-      </form>
+      </div>
+    </div>
+
+    <div class="mid" style="margin-top:clamp(40px,5vw,64px)">
+      <a class="btn b-pri b-lg" href="#fuer-betriebe">Was das für meinen Betrieb kostet</a>
     </div>
   </div>
 </section>
 
-<!-- ============================== Fußzeile ========================== -->
-<footer class="fuss">
+<!-- ═══════════ 5 · WAS ER SONST NOCH ÜBERNIMMT ═══════════ -->
+<section id="funktionsuebersicht" class="bg2">
   <div class="wrap">
-    <div class="fuss__raster">
-      <div>
-        <h4>Betrieb</h4>
-        <p><strong data-cfg="firma.name"></strong> <span data-cfg="firma.rechtsform"></span><br>
-          <span data-cfg="kontakt.strasse"></span><br>
-          <span data-cfg="kontakt.plz"></span> <span data-cfg="kontakt.stadt"></span></p>
+    <div class="sechead mid">
+      <span class="eyebrow">Kurz zusammengefasst</span>
+      <h2>Was er sonst noch übernimmt</h2>
+      <p>Sechs Dinge, die sonst am Büro oder am Chef hängen bleiben.</p>
+    </div>
+    <div class="grid g3" id="funktionen"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 6 · KONTAKT (schlicht, mit markiertem Block) ═══════════ -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow">Kontakt</span>
+      <h2>So erreichen Sie uns</h2>
+    </div>
+
+    <div class="grid g3">
+      <div class="card rv">
+        <h3>Adresse</h3>
+        <dl class="kv" style="margin-top:16px">
+          <dt>Betrieb</dt><dd id="txt-adresse">Musterstraße 12, 72458 Musterstadt</dd>
+        </dl>
+        <dl class="kv"><dt>Büro</dt><dd><a href="#" data-tel id="txt-tel2">07431 987650</a></dd></dl>
+        <dl class="kv"><dt>Notdienst</dt><dd id="txt-notdienst">0172 1234567</dd></dl>
+        <dl class="kv"><dt>E-Mail</dt><dd id="txt-mail">info@musterhandwerk-demo.de</dd></dl>
       </div>
-      <div>
-        <h4>Kontakt</h4>
-        <ul>
-          <li><a href="#" data-tel><span data-cfg="kontakt.telefon"></span></a></li>
-          <li><a href="#" data-mail><span data-cfg="kontakt.email"></span></a></li>
-        </ul>
+
+      <div class="card rv">
+        <h3>Bürozeiten</h3>
+        <ul class="hours" style="margin-top:16px" id="zeiten"></ul>
+        <p class="small mut" style="margin-top:14px"><b>Einsatzgebiet:</b> <span id="txt-gebiet"></span></p>
       </div>
-      <div>
-        <h4>Rechtliches</h4>
-        <ul>
-          <li><a href="impressum.html">Impressum</a></li>
-          <li><a href="datenschutz.html">Datenschutz</a></li>
-        </ul>
+
+      <!-- ► markiert: hier arbeitet der Assistent -->
+      <div class="card kizone rv" style="background:var(--ink);color:#A9B4C2">
+        <span class="kiflag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> Terminvergabe</span>
+        <h3 style="color:#fff;margin-top:6px">Termin? Geht auch jetzt</h3>
+        <p style="color:#A9B4C2;font-size:.93rem">
+          Es ist Sonntagabend und Sie brauchen jemanden? Der Assistent schaut in den
+          Betriebskalender und bucht sofort – ohne Warteschleife, ohne Rückrufzettel.
+        </p>
+        <button class="btn b-pri" style="width:100%;margin-top:6px" type="button"
+                data-frage="Ich brauche einen Termin. Was habt ihr diese Woche frei?">
+          Termin über den Assistenten
+        </button>
       </div>
     </div>
-    <div class="fuss__unten">
-      <span>© <span data-jahr></span> <span data-cfg="firma.name"></span></span>
-      <span>Demoseite – Inhalte sind Platzhalter</span>
+  </div>
+</section>
+
+<!-- ═══════════ 7 · FÜR BETRIEBSINHABER ═══════════ -->
+<section id="fuer-betriebe" class="dark">
+  <div class="wrap">
+
+    <div class="sechead mid">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> ASK Connect</span>
+      <h2>Sie führen selbst einen Handwerksbetrieb?</h2>
+      <p style="color:#A9B4C2">
+        Dann war diese Seite die Vorführung. Genau das bauen wir für Ihren Betrieb –
+        mit Ihren Leistungen, Ihren Stundensätzen und Ihrem Kalender.
+      </p>
     </div>
+
+    <div class="grid g4" id="pakete"></div>
+
+    <div class="testbanner rv">
+      <span class="testbanner-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <div>
+        <b>Zwei Wochen testen – das Risiko liegt bei uns</b>
+        <span>Überzeugt es Sie nicht, geben Sie es zurück. <b class="tb-stark">Vom
+        Einrichtungspreis zahlen Sie dann keinen Cent</b>, und die Monatsgebühr entfällt
+        vollständig. Offen bleiben nur die Kosten, die im Testbetrieb wirklich angefallen
+        sind – Hosting und KI-Nutzung. Unsere Arbeit bleibt in diesem Fall unbezahlt.
+        Ein Risiko, das wir gern tragen – ehrlich gesagt rechnen wir nicht damit,
+        dass Sie davon Gebrauch machen.</span>
+      </div>
+    </div>
+
+    <div class="ablauf-block">
+      <div class="sechead" style="margin-bottom:26px">
+        <h3>Wie es abläuft</h3>
+        <p style="color:#A9B4C2">Sechs Schritte, von denen Sie zwei aktiv begleiten. Den Rest machen wir.</p>
+      </div>
+      <div class="schritte" id="ablauf"></div>
+    </div>
+
+    <div class="faq-block">
+      <div class="sechead" style="margin-bottom:10px">
+        <h3>Offen gesagt</h3>
+      </div>
+      <div class="faq rv">
+        <details>
+          <summary>Meine Kunden wollen mit Menschen reden.</summary>
+          <div>Die meisten wollen vor allem schnell eine Antwort. Wer anrufen möchte, ruft weiter an –
+          daran ändert sich nichts. Der Assistent fängt die Anfragen ab, die Sie sonst gar nicht erreichen,
+          weil um 19 Uhr niemand mehr im Büro sitzt.</div>
+        </details>
+        <details>
+          <summary>Was, wenn er einen Preis zusagt, den ich nicht halten kann?</summary>
+          <div>Tut er nicht. Er antwortet nur aus der Wissensbasis, die Sie freigegeben haben, und für alles
+          Kalkulierte – ein Bad, eine Sanierung, eine Wallbox – nennt er bewusst keine Summe, sondern
+          schlägt ein Aufmaß vor. Findet er nichts, sagt er das und bietet einen Rückruf an.</div>
+        </details>
+        <details>
+          <summary>Muss dann jeder Auftrag im Kalender stehen?</summary>
+          <div>Nein, das entscheiden Sie. Der Assistent kann Termine direkt eintragen – oder
+          stattdessen nur ein Rückruf-Zeitfenster vergeben. Dann steht im Kalender lediglich,
+          dass Sie jemanden anrufen. Alles Weitere klären Sie am Telefon.</div>
+        </details>
+        <details>
+          <summary>Und wenn jemand im Notfall schreibt statt anzurufen?</summary>
+          <div>Genau dafür ist er vorbereitet. Bei Wasseraustritt, Gasgeruch oder Heizungsausfall im Winter
+          bucht er keinen Termin, sondern nennt sofort Ihre Notdienstnummer – bei Gefahr für Personen
+          zusätzlich den Hinweis auf die 112. Ein Terminvorschlag in drei Tagen wäre hier die falsche Antwort.</div>
+        </details>
+        <details>
+          <summary>Ist der Angebotskalkulator in den Paketen enthalten?</summary>
+          <div>Nein. Den bauen wir auf Ihr Gewerk zu – Ihre Standardpositionen, Ihre Marge, Ihre
+          Aufschläge müssen dafür hinterlegt werden, und das sieht bei einem Zaunbauer anders aus
+          als bei einem Heizungsbauer. Was das kostet, sagen wir nach dem Erstgespräch, wenn wir
+          wissen, wie Sie heute kalkulieren.</div>
+        </details>
+        <details>
+          <summary>Muss ich meine Handwerkersoftware wechseln?</summary>
+          <div>Nein. Für den Anfang reichen ein Google Kalender und eine Liste Ihrer Leistungen und
+          Stundensätze. Hat Ihre Software eine Schnittstelle, können wir sie später anbinden – müssen aber nicht.</div>
+        </details>
+        <details>
+          <summary>Und wenn ich wieder aufhören will?</summary>
+          <div>Dann hören Sie auf. Monatlich kündbar, ohne Frist. Ihre Inhalte und Kundendaten
+          bekommen Sie in einem gängigen Format ausgehändigt.</div>
+        </details>
+      </div>
+    </div>
+
+    <div class="mid" id="gespraech" style="margin-top:clamp(44px,6vw,70px); scroll-margin-top:100px">
+      <h3 style="color:#fff;font-size:clamp(1.5rem,4vw,2.2rem)">Zwanzig Minuten, dann wissen Sie es</h3>
+      <p style="color:#A9B4C2;max-width:54ch;margin:0 auto 26px">
+        Kein Verkaufstermin mit Beamer. Ein Telefonat, in dem Sie sagen, wo es klemmt,
+        und wir sagen, ob sich das für Sie rechnet – oder eben nicht.
+        <b style="color:#fff">Wenn Ihnen ein Gespräch vor Ort lieber ist, kommen wir
+        gern in Ihrem Betrieb vorbei</b> – auch dann kostenlos und unverbindlich.
+      </p>
+      <div class="brow" style="justify-content:center">
+        <a class="btn b-pri b-lg" href="#" data-mailto>Gespräch vereinbaren</a>
+        <button class="btn b-lig b-lg" type="button"
+                data-frage="Ich habe selbst einen Handwerksbetrieb. Was genau bekomme ich bei euch?">
+          Erst den Assistenten testen
+        </button>
+      </div>
+      <p class="small" style="margin-top:22px;color:#7E8998">
+        Muster Handwerk ist ein fiktiver Beispielbetrieb. Zahlen zu Erreichbarkeit und
+        Rückgewinnung sind Erfahrungswerte aus dem Handwerk, keine Garantie.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ Fuß ═══════════ -->
+<footer class="foot">
+  <div class="wrap footin">
+    <span>© <span id="jahr">2026</span> Muster Handwerk GmbH · fiktiver Demobetrieb</span>
+    <span>Erstellt von <a href="#" data-mailto>ASK Connect</a> · KI-Assistenten für Handwerksbetriebe</span>
   </div>
 </footer>
 
-<!-- ============================ Chat-Widget ========================= -->
-<button class="chat-knopf" id="chat-knopf">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 8.6 8.6 0 01-3.9-.9L3 21l1.9-5a8.4 8.4 0 01-.9-3.9 8.4 8.4 0 018.4-8.4h.5A8.4 8.4 0 0121 11.5z"/></svg>
-  <span id="chat-knopf-text">Frage stellen</span>
-  <i class="chat-knopf__ping"></i>
-</button>
-
-<div class="chat" id="chat" hidden>
-  <div class="chat__kopf">
-    <div class="chat__avatar" id="chat-avatar">M</div>
-    <div>
-      <strong id="chat-titel">Ihr Ansprechpartner</strong>
-      <span id="chat-untertitel">Fragen &amp; Termine</span>
-    </div>
-    <button class="chat__zu" id="chat-zu" aria-label="Chat schließen">×</button>
-  </div>
-  <div class="chat__verlauf" id="chat-verlauf"></div>
-  <div class="chat__vorschlaege" id="chat-vorschlaege"></div>
-  <div class="chat__eingabe">
-    <textarea id="chat-eingabe" rows="1" placeholder="Ihre Frage ..."></textarea>
-    <button class="chat__senden" id="chat-senden" aria-label="Senden">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-    </button>
-  </div>
-  <p class="chat__fuss">Der Assistent kann Termine direkt einbuchen. Bei dringenden Fällen bitte anrufen.<br>Wie wir Ihre Angaben verarbeiten, steht in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</p>
-</div>
-
 <script src="assets/config.js"></script>
 <script src="assets/app.js"></script>
+<script src="assets/chat.js"></script>
 </body>
 </html>
