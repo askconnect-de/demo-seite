@@ -577,63 +577,221 @@
   }
 
   /* =======================================================================
-     DEMO 2 – Erinnerungs-Automation
+     DEMO 2 – Angebotskalkulator vor Ort
+
+     Zwei Ablaeufe in einer Buehne, die gleichzeitig laufen:
+
+       A  Rechner   – Standardauftrag. Die Felder fuellen sich, der Knopf
+                      wird gedrueckt, das Ergebnis rastet ein und die
+                      Positionen laufen einzeln ein.
+       B  KI-Chat   – Sonderauftrag. Der Monteur diktiert, der Assistent
+                      schlaegt echte Anbieterpreise nach (sichtbarer
+                      Recherchestreifen) und nennt die Quellen.
+
+     Beide Ablaeufe haengen an verketteten Timern. "plane" sammelt sie,
+     "stop" raeumt sie ab, sobald die Buehne aus dem Sichtbereich scrollt.
      ======================================================================= */
-  var FLOW = [
-    { ic:'mic',      t:'Beim Kunden aufgenommen', s:'Diktiert oder getippt, keine 30 Sekunden',
-      o:'„Doppelstabmatte, 18 lfm, 1,80 m hoch,\n1 Gartentor, Untergrund Beton,\nAnfahrt 12 km"' },
-    { ic:'search',   t:'Echte Preise nachschlagen', s:'Vier Anbieter gelesen, nichts geschätzt',
-      o:'→ Median 92 €/lfm · Spanne 78 – 119 €\n→ Pfosten 34 € · Gartentor 289 €' },
-    { ic:'gear',     t:'Material + Lohn + Marge', s:'Nach Ihren hinterlegten Werten',
-      o:'18 lfm · 9 Pfosten · 1 Tor · Betonfundament\n+ 6,5 Std. Montage + 12 km Anfahrt' },
-    { ic:'doc',      t:'Quellen protokollieren', s:'Damit das Büro abends nachrechnen kann',
-      o:'✓ 4 Links im Angebotsordner abgelegt' },
-    { ic:'check',    t:'Preis nennen, solange er danebensteht', s:'Vor Ort statt übermorgen per PDF',
-      o:'→ Kunde sagt zu\n→ Auftrag geht direkt in die Planung' }
+  var KALK_FELDER = [
+    { l:'Zaunart',            v:'Doppelstabmatte' },
+    { l:'Material',           v:'Anthrazit RAL 7016' },
+    { l:'Laufende Meter',     v:'40 m' },
+    { l:'Höhe',               v:'180 cm' },
+    { l:'Pfostenabstand',     v:'2,5 m' },
+    { l:'Untergrund',         v:'Erde / Rasen' },
+    { l:'Tor',                v:'1 × Doppeltor (Einfahrt)' },
+    { l:'Anfahrt',            v:'18 km' },
+    { l:'Arbeitsstunden',     v:'22 h' }
   ];
 
-  function demoFlow(root) {
-    root.querySelector('.flowbody').innerHTML = FLOW.map(function (f) {
-      return '<div class="fstep"><span class="fnode">' + icon(f.ic) + '</span>' +
-        '<span class="fbody"><b>' + f.t + '</b><span>' + f.s + '</span>' +
-        (f.o ? '<div class="out">' + esc(f.o) + '</div>' : '') + '</span></div>';
+  var KALK_CHIPS = ['40 m', '180 cm', '17 Pfosten', 'Erde', '22 h'];
+
+  var KALK_ZEILEN = [
+    { p:'Zaunfelder (40 m, 180 cm)', b:'2.016,00 €' },
+    { p:'Pfosten (17 Stück)',        b:'408,00 €' },
+    { p:'Tor (1 × Doppeltor)',       b:'480,00 €' },
+    { p:'Materialaufschlag / Marge', b:'726,00 €' },
+    { p:'Lohn (22 h × 55 €)',        b:'1.210,00 €' },
+    { p:'Anfahrt (18 km)',           b:'18,00 €' }
+  ];
+
+  var KALK_ZIEL = 5781.02;
+
+  var KALK_CHAT = [
+    { s:'bot', t:'Servus! Standardzäune rechnest du links im Formular.\nFür Sonderteile beschreib einfach, was du brauchst – ich frage nach, was fehlt, und schlage die Preise nach.' },
+    { s:'me',  t:'Sonderanfertigung Metalltor, 3 m breit, Cortenstahl – was kostet das ungefähr?' },
+    { s:'rech' },
+    { s:'bot', t:'Vier Händlerseiten gelesen:\nMedian 1.180 € · Spanne 940 – 1.510 €\n\nMit Montage und deiner Marge: rund 1.790 € brutto. Pfosten sind noch nicht drin.' },
+    { s:'me',  t:'Passt so.' },
+    { s:'bot', t:'Alles klar – die vier Quellen liegen im Angebotsordner. Du kannst heute Abend am Rechner nachsehen, woher jede Zahl kommt.' }
+  ];
+
+  var KALK_QUELLEN = ['zaun-shop.de', 'metallbau-x.de', 'corten-direkt.de', 'baustoffe-y.de'];
+
+  function demoKalkulator(root) {
+    var felderEl = root.querySelector('.kfelder');
+    var btn      = root.querySelector('.kbtn');
+    var erg      = root.querySelector('.kerg');
+    var logEl    = root.querySelector('.kchat-log');
+    var micEl    = root.querySelector('.kchat-mic');
+    if (!felderEl || !btn || !erg || !logEl) return;
+
+    /* Grundgeruest einmal aufbauen ------------------------------------- */
+    felderEl.innerHTML = KALK_FELDER.map(function (f, i) {
+      return '<div class="kfeld' + (i >= 6 ? ' weit' : '') + '">' +
+        '<i>' + esc(f.l) + '</i><b>' + esc(f.v) + '</b></div>';
     }).join('');
 
-    var steps = root.querySelectorAll('.fstep');
-    var cnt = root.querySelector('.cnt'), euro = root.querySelector('.euro');
+    erg.innerHTML =
+      '<div class="kerg-kopf">' +
+        '<span><b>Doppelstabmattenzaun</b><span>anthrazit · 40 m</span></span>' +
+        '<span class="kerg-tag">Standardpreis</span>' +
+      '</div>' +
+      '<div class="kpreis"><i>Verkaufspreis inkl. MwSt.</i>' +
+        '<b class="kpreis-wert">0,00 €</b>' +
+        '<span>netto 4.858,00 € · zzgl. 19 % MwSt.</span></div>' +
+      '<div class="kchips">' + KALK_CHIPS.map(function (c) {
+        return '<span class="kchip">' + esc(c) + '</span>';
+      }).join('') + '</div>' +
+      '<div class="kzeilen">' + KALK_ZEILEN.map(function (z) {
+        return '<div class="kzeile"><span>' + esc(z.p) + '</span><b>' + esc(z.b) + '</b></div>';
+      }).join('') + '</div>';
+
+    var felder = root.querySelectorAll('.kfeld');
+    var chips  = root.querySelectorAll('.kchip');
+    var zeilen = root.querySelectorAll('.kzeile');
+    var wertEl = root.querySelector('.kpreis-wert');
+
     var timer = [];
+    function plane(fn, ms) { timer.push(setTimeout(fn, ms)); }
     function stop() { timer.forEach(clearTimeout); timer = []; }
 
-    function zaehl(el, ziel, ms) {
+    function euroText(n) {
+      return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+    }
+
+    function zaehleHoch(ms) {
       var t0 = performance.now();
       (function tick(now) {
         var p = Math.min((now - t0) / ms, 1), e = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(ziel * e).toLocaleString('de-DE') + ' €';
+        wertEl.textContent = euroText(KALK_ZIEL * e);
         if (p < 1) requestAnimationFrame(tick);
       })(t0);
     }
 
+    /* --- A · der Rechner ---------------------------------------------- */
+    function laufRechner() {
+      felder.forEach(function (f) { f.classList.remove('da', 'neu'); });
+      chips.forEach(function (c) { c.classList.remove('da'); });
+      zeilen.forEach(function (z) { z.classList.remove('da'); });
+      erg.classList.remove('da');
+      btn.classList.remove('druck');
+      wertEl.textContent = '0,00 €';
+
+      felder.forEach(function (f, i) {
+        plane(function () {
+          f.classList.add('da', 'neu');
+          plane(function () { f.classList.remove('neu'); }, 520);
+        }, 700 + i * 520);
+      });
+
+      var nachFeldern = 700 + felder.length * 520 + 400;
+
+      plane(function () {
+        btn.classList.add('druck');
+        plane(function () { btn.classList.remove('druck'); }, 320);
+      }, nachFeldern);
+
+      plane(function () {
+        erg.classList.add('da');
+        zaehleHoch(1200);
+      }, nachFeldern + 420);
+
+      chips.forEach(function (c, i) {
+        plane(function () { c.classList.add('da'); }, nachFeldern + 1700 + i * 130);
+      });
+      zeilen.forEach(function (z, i) {
+        plane(function () { z.classList.add('da'); }, nachFeldern + 2400 + i * 200);
+      });
+    }
+
+    /* --- B · der Chat -------------------------------------------------- */
+    function rechercheHtml() {
+      return '<div class="krech">' +
+          '<div class="krech-kopf"><span class="krech-spin"></span>' +
+            '<b>KI recherchiert</b> · liest die Preisseiten der Händler …</div>' +
+          '<div class="krech-bar"><i></i></div>' +
+          '<div class="krech-quellen">' + KALK_QUELLEN.map(function (q) {
+            return '<span class="kquelle">' + esc(q) + '</span>';
+          }).join('') + '</div>' +
+        '</div>';
+    }
+
+    function zeigeChat(i) {
+      if (i >= KALK_CHAT.length) return;
+      var m = KALK_CHAT[i];
+
+      if (m.s === 'rech') {
+        logEl.insertAdjacentHTML('beforeend', rechercheHtml());
+        kuerze();
+        var bar = logEl.querySelector('.krech:last-child .krech-bar i');
+        var qs  = logEl.querySelectorAll('.krech:last-child .kquelle');
+        plane(function () { if (bar) bar.style.width = '100%'; }, 80);
+        qs.forEach(function (q, n) {
+          plane(function () { q.classList.add('da'); }, 700 + n * 480);
+        });
+        plane(function () {
+          var sp = logEl.querySelector('.krech:last-child .krech-spin');
+          var kopf = logEl.querySelector('.krech:last-child .krech-kopf');
+          if (sp) sp.remove();
+          if (kopf) kopf.innerHTML = '<b>4 Quellen gefunden</b> · Median 1.180 € je Tor';
+        }, 2700);
+        plane(function () { zeigeChat(i + 1); }, 3400);
+        return;
+      }
+
+      if (m.s === 'me' && micEl) {
+        micEl.classList.add('an');
+        plane(function () { micEl.classList.remove('an'); }, 900);
+      }
+
+      logEl.insertAdjacentHTML('beforeend',
+        '<div class="kmsg ' + m.s + '">' + esc(m.t) + '</div>');
+      kuerze();
+
+      var n = m.t.length;
+      var warte = m.s === 'bot'
+        ? Math.min(1000 + n * 24, 3400)
+        : Math.min(700 + n * 16, 1600);
+      plane(function () { zeigeChat(i + 1); }, warte);
+    }
+
+    /* Der Verlauf ist kurz gehalten – aeltere Nachrichten fallen raus,
+       damit nichts aus dem Kasten laeuft. */
+    function kuerze() {
+      while (logEl.children.length > 3) logEl.removeChild(logEl.firstChild);
+    }
+
     function lauf() {
       stop();
-      steps.forEach(function (s) { s.classList.remove('live'); });
-      if (cnt) cnt.textContent = '–';
-      if (euro) euro.textContent = '0 €';
-      steps.forEach(function (s, i) {
-        timer.push(setTimeout(function () {
-          s.classList.add('live');
-          if (i === 1 && cnt) cnt.textContent = '4 Quellen';
-          if (i === steps.length - 1 && euro) zaehl(euro, 4980, 1300);
-        }, 800 + i * 1400));
-      });
-      timer.push(setTimeout(lauf, 800 + steps.length * 1400 + 5500));
+      logEl.innerHTML = '';
+      laufRechner();
+      plane(function () { zeigeChat(0); }, 600);
+      plane(lauf, 23000);
     }
 
     if (reduce) {
-      steps.forEach(function (s) { s.classList.add('live'); });
-      if (cnt) cnt.textContent = '4 Quellen';
-      if (euro) euro.textContent = '4.980 €';
+      felder.forEach(function (f) { f.classList.add('da'); });
+      chips.forEach(function (c) { c.classList.add('da'); });
+      zeilen.forEach(function (z) { z.classList.add('da'); });
+      erg.classList.add('da');
+      wertEl.textContent = euroText(KALK_ZIEL);
+      logEl.innerHTML = KALK_CHAT.filter(function (m) { return m.s !== 'rech'; })
+        .slice(-3).map(function (m) {
+          return '<div class="kmsg ' + m.s + '">' + esc(m.t) + '</div>';
+        }).join('');
       return;
     }
+
     sicht(root, lauf, stop);
     var b = root.querySelector('.replay');
     if (b) b.addEventListener('click', lauf);
@@ -720,7 +878,7 @@
 
     var bu = document.getElementById('demo-buehne'); if (bu) demoBuehne(bu);
     var wa = document.getElementById('demo-wa');   if (wa) demoWhatsApp(wa);
-    var fl = document.getElementById('demo-flow'); if (fl) demoFlow(fl);
+    var ka = document.getElementById('demo-kalk'); if (ka) demoKalkulator(ka);
     var ig = document.getElementById('demo-ig');   if (ig) demoInsta(ig);
 
     var jahr = document.getElementById('jahr');

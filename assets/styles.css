@@ -1244,3 +1244,211 @@ body.plain .asklabel{ display:none; }
   .uc-marke b{ font-size:.85rem; letter-spacing:.08em; white-space:normal; }
   .uc-marke i{ font-size:.72rem; }
 }
+
+/* =========================================================================
+   Use Case 02 – Angebotskalkulator
+   Zwei Abläufe nebeneinander: links der Rechner für Standardaufträge,
+   rechts der KI-Chat für Sonderaufträge. Beide laufen durchgehend.
+   Die Markierung nutzt .kizone/.kiflag – die Gegenregeln unter body.plain
+   greifen dadurch automatisch mit.
+   ========================================================================= */
+.kalk{ background:#fff; padding:clamp(18px,2.6vw,28px); border-radius:var(--rx); margin-top:clamp(22px,3vw,34px); }
+.kalk-in{ display:grid; grid-template-columns:1.08fr 1fr; gap:clamp(18px,2.4vw,30px); align-items:start; }
+.kalk-in > *{ min-width:0; }
+.kseite{ min-width:0; }
+.kseite-titel{
+  display:block; margin-bottom:10px; font-size:.665rem; font-weight:800;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--soft);
+}
+
+/* --- A · Rechner ------------------------------------------------------- */
+.krechner{ display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:start; }
+.krechner > *{ min-width:0; }
+.kkarte{ background:var(--bg2); border:1px solid var(--line); border-radius:var(--rl); padding:13px; }
+.kkarte-kopf{ display:flex; align-items:center; gap:7px; margin-bottom:11px; }
+.kkarte-kopf b{ font-size:.83rem; color:var(--ink); }
+.kkarte-kopf .kpunkt{ width:6px; height:6px; border-radius:50%; background:var(--ok); flex:none; }
+
+.kfelder{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.kfeld{ min-width:0; opacity:0; transform:translateY(5px); transition:opacity .3s, transform .3s; }
+.kfeld.da{ opacity:1; transform:none; }
+.kfeld i{
+  display:block; font-style:normal; font-size:.6rem; font-weight:700; letter-spacing:.04em;
+  color:var(--soft); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.kfeld b{
+  display:block; background:#fff; border:1px solid var(--line); border-radius:8px;
+  padding:6px 8px; font-size:.755rem; font-weight:600; color:var(--ink2);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.kfeld.weit{ grid-column:1 / -1; }
+.kfeld.neu b{ border-color:var(--ac); box-shadow:0 0 0 3px rgba(37,99,235,.13); }
+
+.kbtn{
+  width:100%; margin-top:11px; border:0; border-radius:9px; cursor:default;
+  background:var(--ac); color:#fff; font-weight:700; font-size:.8rem; padding:9px 12px;
+  transition:transform .12s, box-shadow .25s; box-shadow:0 4px 14px rgba(37,99,235,.28);
+}
+.kbtn.druck{ transform:translateY(2px) scale(.985); box-shadow:0 0 0 5px rgba(37,99,235,.16); }
+.kbtn-hint{ display:block; margin-top:7px; font-size:.6rem; color:var(--soft); text-align:center; }
+
+.kerg{
+  background:var(--ink); border-radius:var(--rl); padding:13px; color:#A9B4C2;
+  opacity:0; transform:translateY(9px) scale(.985); transition:opacity .45s, transform .45s;
+  min-height:210px; display:flex; flex-direction:column;
+}
+.kerg.da{ opacity:1; transform:none; }
+.kerg-kopf{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+.kerg-kopf b{ display:block; font-size:.82rem; color:#fff; line-height:1.25; }
+.kerg-kopf span{ font-size:.68rem; color:#7E8998; }
+.kerg-tag{
+  flex:none; font-size:.58rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  color:#fff; background:var(--ac); border-radius:100px; padding:3px 8px;
+}
+.kpreis{
+  margin-top:11px; background:rgba(37,99,235,.14); border:1px solid rgba(37,99,235,.42);
+  border-radius:11px; padding:11px 12px; text-align:center;
+}
+.kpreis i{
+  display:block; font-style:normal; font-size:.56rem; font-weight:800; letter-spacing:.11em;
+  text-transform:uppercase; color:#93B4FD; margin-bottom:3px;
+}
+.kpreis b{ display:block; font-family:var(--disp); font-size:clamp(1.5rem,3.4vw,1.95rem); color:#fff; line-height:1; letter-spacing:-.02em; }
+.kpreis span{ display:block; margin-top:4px; font-size:.63rem; color:#8E9AAA; }
+
+.kchips{ display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+.kchip{
+  font-size:.62rem; font-weight:600; color:#C7D0DC; background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12); border-radius:100px; padding:2px 8px;
+  opacity:0; transform:translateY(4px); transition:.3s;
+}
+.kchip.da{ opacity:1; transform:none; }
+
+.kzeilen{ margin-top:10px; }
+.kzeile{
+  display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+  padding:5px 0; border-bottom:1px solid rgba(255,255,255,.08);
+  font-size:.7rem; opacity:0; transform:translateX(-6px); transition:.3s;
+}
+.kzeile.da{ opacity:1; transform:none; }
+.kzeile:last-child{ border-bottom:0; }
+.kzeile span{ min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.kzeile b{ flex:none; color:#fff; font-weight:650; font-variant-numeric:tabular-nums; }
+
+.kerg-leer{ margin:auto; text-align:center; color:#5E6A7A; font-size:.74rem; padding:0 10px; }
+.kerg-leer svg{ width:26px; height:26px; margin:0 auto 8px; color:#3A4556; }
+
+/* --- B · Sonderauftrags-Chat ------------------------------------------- */
+.kchat{
+  background:var(--ink); border-radius:var(--rl); overflow:hidden;
+  display:flex; flex-direction:column; height:clamp(330px,42vw,392px);
+}
+.kchat-kopf{
+  display:flex; align-items:center; gap:9px; padding:11px 13px;
+  background:rgba(255,255,255,.05); border-bottom:1px solid rgba(255,255,255,.08);
+}
+.kchat-av{ width:28px; height:28px; border-radius:9px; background:var(--ac); display:grid; place-items:center; flex:none; }
+.kchat-av svg{ width:15px; height:15px; color:#fff; }
+.kchat-kopf b{ display:block; font-size:.8rem; color:#fff; line-height:1.2; }
+.kchat-kopf i{ font-style:normal; font-size:.66rem; color:#8E9AAA; display:flex; align-items:center; gap:5px; }
+.kchat-log{
+  flex:1; min-height:0; overflow:hidden; padding:12px 13px;
+  display:flex; flex-direction:column; gap:8px; justify-content:flex-end;
+}
+.kmsg{
+  max-width:88%; padding:8px 11px; border-radius:13px; font-size:.765rem; line-height:1.45;
+  white-space:pre-line; animation:kmsgRein .3s ease both;
+}
+.kmsg.bot{ background:rgba(255,255,255,.08); color:#D3DAE3; border-bottom-left-radius:5px; align-self:flex-start; }
+.kmsg.me{ background:var(--ac); color:#fff; border-bottom-right-radius:5px; align-self:flex-end; }
+@keyframes kmsgRein{ from{ opacity:0; transform:translateY(7px) } to{ opacity:1; transform:none } }
+
+/* Recherche-Streifen: zeigt, dass wirklich nachgeschlagen wird */
+.krech{
+  align-self:flex-start; max-width:92%; background:rgba(255,255,255,.06);
+  border:1px solid rgba(37,99,235,.4); border-radius:11px; padding:8px 11px;
+  animation:kmsgRein .3s ease both;
+}
+.krech-kopf{ display:flex; align-items:center; gap:7px; font-size:.72rem; color:#C7D0DC; }
+.krech-kopf b{ color:#93B4FD; font-weight:700; }
+.krech-spin{
+  width:12px; height:12px; border-radius:50%; flex:none;
+  border:2px solid rgba(147,180,253,.3); border-top-color:#93B4FD;
+  animation:kspin .7s linear infinite;
+}
+@keyframes kspin{ to{ transform:rotate(360deg) } }
+.krech-bar{ margin-top:7px; height:3px; border-radius:3px; background:rgba(255,255,255,.1); overflow:hidden; }
+.krech-bar i{ display:block; height:100%; width:0; background:var(--ac); border-radius:3px; transition:width .5s linear; }
+.krech-quellen{ margin-top:7px; display:flex; flex-wrap:wrap; gap:4px; }
+.kquelle{
+  font-size:.6rem; color:#93B4FD; background:rgba(37,99,235,.16);
+  border:1px solid rgba(37,99,235,.34); border-radius:100px; padding:2px 7px;
+  opacity:0; transform:translateY(3px); transition:.25s;
+}
+.kquelle.da{ opacity:1; transform:none; }
+
+.kchat-foot{
+  display:flex; align-items:center; gap:8px; padding:9px 11px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.kchat-mic{
+  width:30px; height:30px; border-radius:9px; flex:none; display:grid; place-items:center;
+  background:rgba(255,255,255,.08); position:relative;
+}
+.kchat-mic svg{ width:14px; height:14px; color:#A9B4C2; }
+.kchat-mic.an{ background:var(--ac); }
+.kchat-mic.an svg{ color:#fff; }
+.kchat-mic.an::after{
+  content:''; position:absolute; inset:-4px; border-radius:12px;
+  border:2px solid rgba(37,99,235,.5); animation:kpuls 1.1s ease-out infinite;
+}
+@keyframes kpuls{ from{ opacity:.9; transform:scale(.9) } to{ opacity:0; transform:scale(1.25) } }
+.kchat-feld{
+  flex:1; min-width:0; background:rgba(255,255,255,.06); border-radius:9px;
+  padding:7px 11px; font-size:.72rem; color:#6E7A8A;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+.kalk-fuss{
+  margin-top:14px; padding-top:12px; border-top:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+.kalk-fuss span{ font-size:.74rem; color:var(--soft); }
+.kalk-fuss .replay{ flex:none; }
+
+/* --- Schmalere Bildschirme -------------------------------------------- */
+@media (max-width:1060px){
+  .kalk-in{ grid-template-columns:1fr; gap:24px; }
+  .kchat{ height:360px; }
+}
+@media (max-width:680px){
+  .krechner{ grid-template-columns:1fr; }
+  .kerg{ min-height:0; }
+  .kchat{ height:340px; }
+  .kfeld i{ font-size:.58rem; }
+}
+
+/* Kopf und Vorteilsraster des Angebotskalkulators laufen ueber die volle
+   Breite, weil die Buehne darunter zweispaltig ist. */
+.uc-kopf{ max-width:74ch; }
+.uc-kopf h3{ font-size:clamp(1.4rem,3.1vw,1.95rem); letter-spacing:-.018em; }
+.wins-breit{ grid-template-columns:1fr 1fr; gap:14px 34px; margin-top:22px; }
+@media (max-width:760px){
+  .wins-breit{ grid-template-columns:1fr; gap:11px; }
+}
+
+/* Der Verlauf wird oben ausgeblendet, damit die aelteste Nachricht weich
+   verschwindet statt hart angeschnitten zu wirken. */
+.kchat-log{
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 26px);
+          mask-image:linear-gradient(180deg,transparent 0,#000 26px);
+}
+
+/* Auf sehr schmalen Geraeten darf das Fähnchen enger sitzen und kleiner
+   werden, statt seitlich aus der markierten Zone herauszuragen. */
+@media (max-width:400px){
+  .kiflag{ left:12px; right:12px; max-width:calc(100% - 24px); padding:5px 10px 5px 9px;
+           font-size:.625rem; letter-spacing:.07em; }
+  .kiflag span, .kiflag{ overflow:hidden; text-overflow:ellipsis; }
+  .kiflag.rechts{ left:12px; }
+}

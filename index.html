@@ -233,48 +233,83 @@
       </div>
     </div>
 
-    <!-- Use Case 2 · der Umsatz-Use-Case, bewusst in der Mitte -->
+    <!-- Use Case 2 · der Umsatz-Use-Case, bewusst in der Mitte.
+         Bekommt die volle Breite: Text oben, darunter zwei Abläufe
+         nebeneinander – Rechner für Standard, Chat für Sonderaufträge. -->
     <div class="uc-trenner">
       <span class="uc-marke"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Use Case 02</b><i>Angebot direkt vor Ort</i></span>
     </div>
-    <div class="bst rev">
-      <div class="bstdemo rv">
-        <div class="flow" id="demo-flow">
-          <div class="flowhead">
-            <span class="lt"></span><span>Angebotskalkulator · beim Kunden</span><span class="cnt">–</span>
-          </div>
-          <div class="flowbody"></div>
-          <div class="flowfoot">
-            <span><b class="euro">0 €</b><span>Angebot, live im Vorgarten gerechnet</span></span>
-            <button class="replay" type="button">Nochmal</button>
+    <div class="uc-kopf rv">
+      <h3>Der Preis steht, bevor Sie wieder im Auto sitzen</h3>
+      <p>
+        Sie stehen beim Kunden, er erzählt, was er will – und Sie sagen: „Ich schick
+        Ihnen was zusammen." Bis das Angebot geschrieben ist, vergehen Tage, und in
+        der Zwischenzeit war ein anderer da.
+        <strong style="color:#fff">Hier tippen oder diktieren Sie die Maße ins Handy
+        und haben den Preis, während der Kunde noch danebensteht.</strong>
+      </p>
+    </div>
+
+    <div class="kalk kizone" id="demo-kalk">
+      <span class="kiflag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> Läuft auf dem Handy</span>
+
+      <div class="kalk-in">
+
+        <!-- A · Standardauftrag: Rechner -->
+        <div class="kseite">
+          <span class="kseite-titel">Standardauftrag · durchgerechnet in Sekunden</span>
+          <div class="krechner">
+            <div class="kkarte">
+              <div class="kkarte-kopf"><span class="kpunkt"></span><b>Konfiguration</b></div>
+              <div class="kfelder"></div>
+              <button class="kbtn" type="button" tabindex="-1" aria-hidden="true">Preis berechnen</button>
+              <span class="kbtn-hint">Keine personenbezogenen Daten – reine Kalkulation.</span>
+            </div>
+            <div class="kerg"></div>
           </div>
         </div>
+
+        <!-- B · Sonderauftrag: KI-Chat mit echter Recherche -->
+        <div class="kseite">
+          <span class="kseite-titel">Sonderauftrag · KI schlägt die Preise nach</span>
+          <div class="kchat">
+            <div class="kchat-kopf">
+              <span class="kchat-av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></svg></span>
+              <span><b>Angebots-Assistent</b><i><span class="dotlive"></span>online</i></span>
+            </div>
+            <div class="kchat-log"></div>
+            <div class="kchat-foot">
+              <span class="kchat-mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10.5a7 7 0 0 0 14 0M12 17.5V21"/></svg></span>
+              <span class="kchat-feld">Zum Diktieren gedrückt halten …</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="rv">
-        <h3>Der Preis steht, bevor Sie wieder im Auto sitzen</h3>
-        <p>
-          Sie stehen beim Kunden, er erzählt, was er will – und Sie sagen: „Ich schick
-          Ihnen was zusammen." Bis das Angebot geschrieben ist, vergehen Tage. In der
-          Zwischenzeit war ein anderer da. <strong style="color:#fff">Hier sprechen Sie
-          die Maße ins Handy und haben den Preis, während der Kunde noch danebensteht.</strong>
-        </p>
-        <div class="wins">
-          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7 13.5 15.5l-4-4L2 19"/><path d="M16 7h6v6"/></svg></span>
-            <span><b>Rechnen Sie es für sich durch</b><span>120 Aufmaßtermine im Jahr, Ø 4.200 € Auftragswert. Wer beim Termin einen Preis nennt, gewinnt erfahrungsgemäß deutlich öfter – zehn Prozentpunkte mehr sind rund 50.000 € im Jahr.</span></span></div>
-          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg></span>
-            <span><b>Er schätzt nicht, er schlägt nach</b><span>Für Sonderteile liest er mehrere echte Anbieterseiten, bildet Median und Spanne – statt sich eine Zahl auszudenken.</span></span></div>
-          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg></span>
-            <span><b>Jede Quelle wird protokolliert</b><span>Alle verwendeten Links landen im Angebotsordner. Abends am Rechner sehen Sie, woher jede Zahl stammt, und können sie vor der Abgabe korrigieren.</span></span></div>
-          <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.34.4.62.73.79H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-            <span><b>Ihre Werte, nicht unsere</b><span>Stundensatz, Marge, Aufschläge und Ihre Standardpositionen sind hinterlegt. Der Kalkulator rechnet damit – nicht mit Durchschnittswerten aus dem Internet.</span></span></div>
-        </div>
-        <p class="small mut" style="margin-top:16px">
-          Diesen Kalkulator haben wir für einen Zaunbaubetrieb bereits gebaut. Die
-          Abschlussquoten oben sind Erfahrungswerte, keine Garantie.
-        </p>
+      <div class="kalk-fuss">
+        <span>Beides derselbe Agent – der Rechner für das, was Sie täglich anbieten,
+          der Chat für alles Krumme.</span>
+        <button class="replay" type="button">Nochmal</button>
       </div>
     </div>
+
+    <div class="wins wins-breit rv">
+      <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7 13.5 15.5l-4-4L2 19"/><path d="M16 7h6v6"/></svg></span>
+        <span><b>Rechnen Sie es für sich durch</b><span>120 Aufmaßtermine im Jahr, Ø 4.200 € Auftragswert. Wer beim Termin einen Preis nennt, gewinnt erfahrungsgemäß deutlich öfter – zehn Prozentpunkte mehr sind rund 50.000 € im Jahr.</span></span></div>
+      <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.3-4.3"/></svg></span>
+        <span><b>Er schätzt nicht, er schlägt nach</b><span>Für Sonderteile liest er mehrere echte Anbieterseiten, bildet Median und Spanne – statt sich eine Zahl auszudenken. Findet er nichts, sagt er das.</span></span></div>
+      <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg></span>
+        <span><b>Jede Quelle wird protokolliert</b><span>Alle verwendeten Links landen im Angebotsordner. Abends am Rechner sehen Sie, woher jede Zahl stammt, und korrigieren vor der Abgabe.</span></span></div>
+      <div class="win"><span class="winic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.34.4.62.73.79H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+        <span><b>Ihre Werte, nicht unsere</b><span>Stundensatz, Marge, Aufschläge und Ihre Standardpositionen sind hinterlegt. Der Kalkulator rechnet damit – nicht mit Durchschnittswerten aus dem Internet.</span></span></div>
+    </div>
+
+    <p class="small mut" style="margin-top:14px;max-width:70ch">
+      Beide Abläufe oben sind nachgestellt. Gebaut haben wir diesen Kalkulator bereits
+      für einen Zaunbaubetrieb – die gezeigten Zahlen stammen aus dessen Beispielrechnung.
+      Die Abschlussquoten sind Erfahrungswerte, keine Garantie.
+    </p>
 
     <!-- Use Case 3 -->
     <div class="uc-trenner">
