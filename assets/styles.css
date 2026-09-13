@@ -1270,19 +1270,48 @@ body.plain .asklabel{ display:none; }
 .kkarte-kopf .kpunkt{ width:6px; height:6px; border-radius:50%; background:var(--ok); flex:none; }
 
 .kfelder{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.kfeld{ min-width:0; opacity:0; transform:translateY(5px); transition:opacity .3s, transform .3s; }
-.kfeld.da{ opacity:1; transform:none; }
+/* Die Felder stehen von Anfang an da – gefuellt wird im Ablauf. */
+.kfeld{ min-width:0; position:relative; }
 .kfeld i{
   display:block; font-style:normal; font-size:.6rem; font-weight:700; letter-spacing:.04em;
   color:var(--soft); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .kfeld b{
-  display:block; background:#fff; border:1px solid var(--line); border-radius:8px;
+  display:flex; align-items:center; gap:6px; min-height:30px;
+  background:#fff; border:1px solid var(--line); border-radius:8px;
   padding:6px 8px; font-size:.755rem; font-weight:600; color:var(--ink2);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  transition:border-color .2s, box-shadow .2s;
 }
 .kfeld.weit{ grid-column:1 / -1; }
-.kfeld.neu b{ border-color:var(--ac); box-shadow:0 0 0 3px rgba(37,99,235,.13); }
+
+.kwert{ flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.kwert.leer{ color:var(--soft); font-weight:500; }
+.kchev{ width:12px; height:12px; flex:none; color:var(--soft); transition:transform .2s; }
+
+/* Feld in Bearbeitung */
+.kfeld.aktiv b{ border-color:var(--ac); box-shadow:0 0 0 3px rgba(37,99,235,.13); }
+.kfeld.aktiv .kchev{ color:var(--ac); }
+.kfeld.offen .kchev{ transform:rotate(180deg); }
+.kfeld.fertig .kwert{ color:var(--ink); }
+
+/* Tippcursor der Zahlenfelder */
+.kcar{ width:1.5px; height:13px; flex:none; background:var(--ac); opacity:0; border-radius:1px; }
+.kfeld.aktiv .kcar{ opacity:1; animation:kblink .9s steps(1) infinite; }
+@keyframes kblink{ 50%{ opacity:0 } }
+
+/* Aufgeklappte Auswahl – zeigt, dass es mehrere Moeglichkeiten gibt */
+.kopt{
+  position:absolute; top:100%; left:0; min-width:100%; z-index:6; margin-top:4px;
+  background:#fff; border:1px solid var(--line); border-radius:9px; padding:4px;
+  box-shadow:var(--sh2); opacity:0; transform:translateY(-5px) scale(.98);
+  transform-origin:top center; pointer-events:none; transition:.18s ease;
+}
+.kfeld.offen .kopt{ opacity:1; transform:none; }
+.kopt-e{
+  display:block; padding:5px 8px; border-radius:6px; font-size:.72rem; font-weight:500;
+  color:var(--body); white-space:nowrap; transition:background .18s, color .18s;
+}
+.kopt-e.gewaehlt{ background:var(--acs); color:var(--ac6); font-weight:700; }
 
 .kbtn{
   width:100%; margin-top:11px; border:0; border-radius:9px; cursor:default;

@@ -591,16 +591,26 @@
      Beide Ablaeufe haengen an verketteten Timern. "plane" sammelt sie,
      "stop" raeumt sie ab, sobald die Buehne aus dem Sichtbereich scrollt.
      ======================================================================= */
+  /* Die Felder stehen von Anfang an leer da. Im Ablauf klappt bei den
+     Auswahlfeldern die Liste auf, damit man sieht, dass es mehrere
+     Moeglichkeiten gibt – erst dann rastet der Wert ein.
+       typ 'wahl'  optionen + w = Index der gewaehlten Option
+       typ 'zahl'  wird getippt statt ausgewaehlt                        */
   var KALK_FELDER = [
-    { l:'Zaunart',            v:'Doppelstabmatte' },
-    { l:'Material',           v:'Anthrazit RAL 7016' },
-    { l:'Laufende Meter',     v:'40 m' },
-    { l:'Höhe',               v:'180 cm' },
-    { l:'Pfostenabstand',     v:'2,5 m' },
-    { l:'Untergrund',         v:'Erde / Rasen' },
-    { l:'Tor',                v:'1 × Doppeltor (Einfahrt)' },
-    { l:'Anfahrt',            v:'18 km' },
-    { l:'Arbeitsstunden',     v:'22 h' }
+    { l:'Zaunart', typ:'wahl', w:0, breit:true,
+      o:['Doppelstabmatte', 'Maschendraht', 'Holzzaun', 'Gabione'] },
+    { l:'Material', typ:'wahl', w:1, breit:true,
+      o:['Verzinkt', 'Anthrazit RAL 7016', 'Grün RAL 6005'] },
+    { l:'Laufende Meter', typ:'zahl', v:'40 m' },
+    { l:'Höhe', typ:'wahl', w:2,
+      o:['120 cm', '150 cm', '180 cm', '200 cm'] },
+    { l:'Pfostenabstand', typ:'zahl', v:'2,5 m' },
+    { l:'Untergrund', typ:'wahl', w:0,
+      o:['Erde / Rasen', 'Kies', 'Pflaster', 'Beton'] },
+    { l:'Tor', typ:'wahl', w:2, breit:true,
+      o:['Kein Tor', '1 × Gehtor', '1 × Doppeltor (Einfahrt)'] },
+    { l:'Anfahrt', typ:'zahl', v:'18 km' },
+    { l:'Arbeitsstunden', typ:'zahl', v:'22 h' }
   ];
 
   var KALK_CHIPS = ['40 m', '180 cm', '17 Pfosten', 'Erde', '22 h'];
@@ -636,9 +646,22 @@
     if (!felderEl || !btn || !erg || !logEl) return;
 
     /* Grundgeruest einmal aufbauen ------------------------------------- */
-    felderEl.innerHTML = KALK_FELDER.map(function (f, i) {
-      return '<div class="kfeld' + (i >= 6 ? ' weit' : '') + '">' +
-        '<i>' + esc(f.l) + '</i><b>' + esc(f.v) + '</b></div>';
+    var CHEVRON = '<svg class="kchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+
+    felderEl.innerHTML = KALK_FELDER.map(function (f) {
+      var klassen = 'kfeld' + (f.breit ? ' weit' : '') + (f.typ === 'wahl' ? ' wahl' : '');
+      var liste = f.typ === 'wahl'
+        ? '<div class="kopt">' + f.o.map(function (t) {
+            return '<span class="kopt-e">' + esc(t) + '</span>';
+          }).join('') + '</div>'
+        : '';
+      return '<div class="' + klassen + '">' +
+        '<i>' + esc(f.l) + '</i>' +
+        '<b><span class="kwert leer">' + (f.typ === 'wahl' ? 'bitte wählen' : '–') + '</span>' +
+          (f.typ === 'wahl' ? CHEVRON : '<span class="kcar"></span>') + '</b>' +
+        liste +
+      '</div>';
     }).join('');
 
     erg.innerHTML =
@@ -678,23 +701,65 @@
       })(t0);
     }
 
-    /* --- A · der Rechner ---------------------------------------------- */
+    /* --- A · der Rechner ----------------------------------------------
+       Ein Auswahlfeld braucht laenger als ein Zahlenfeld: erst klappt die
+       Liste auf, dann wird eine Option markiert, dann schliesst sie wieder.
+       Die Dauern hier und die Uebergaenge in styles.css gehoeren zusammen. */
+    var WAHL_DAUER = 1500, ZAHL_DAUER = 900;
+
+    function feldZuruecksetzen(el, f) {
+      el.classList.remove('aktiv', 'offen', 'fertig');
+      var wert = el.querySelector('.kwert');
+      wert.textContent = f.typ === 'wahl' ? 'bitte wählen' : '–';
+      wert.classList.add('leer');
+      el.querySelectorAll('.kopt-e').forEach(function (o) { o.classList.remove('gewaehlt'); });
+    }
+
+    /* Fuellt ein Feld und meldet zurueck, wie lange es dafuer braucht */
+    function feldFuellen(el, f) {
+      var wert = el.querySelector('.kwert');
+      el.classList.add('aktiv');
+
+      if (f.typ !== 'wahl') {
+        plane(function () {
+          wert.textContent = f.v;
+          wert.classList.remove('leer');
+        }, 320);
+        plane(function () { el.classList.remove('aktiv'); el.classList.add('fertig'); }, ZAHL_DAUER - 130);
+        return ZAHL_DAUER;
+      }
+
+      var optionen = el.querySelectorAll('.kopt-e');
+      plane(function () { el.classList.add('offen'); }, 110);
+      plane(function () {
+        if (optionen[f.w]) optionen[f.w].classList.add('gewaehlt');
+      }, 780);
+      plane(function () {
+        el.classList.remove('offen');
+        wert.textContent = f.o[f.w];
+        wert.classList.remove('leer');
+      }, 1180);
+      plane(function () { el.classList.remove('aktiv'); el.classList.add('fertig'); }, 1330);
+      return WAHL_DAUER;
+    }
+
     function laufRechner() {
-      felder.forEach(function (f) { f.classList.remove('da', 'neu'); });
+      felder.forEach(function (el, i) { feldZuruecksetzen(el, KALK_FELDER[i]); });
       chips.forEach(function (c) { c.classList.remove('da'); });
       zeilen.forEach(function (z) { z.classList.remove('da'); });
       erg.classList.remove('da');
       btn.classList.remove('druck');
       wertEl.textContent = '0,00 €';
 
-      felder.forEach(function (f, i) {
-        plane(function () {
-          f.classList.add('da', 'neu');
-          plane(function () { f.classList.remove('neu'); }, 520);
-        }, 700 + i * 520);
+      var t = 700;
+      felder.forEach(function (el, i) {
+        var f = KALK_FELDER[i];
+        var start = t;
+        plane(function () { feldFuellen(el, f); }, start);
+        t += (f.typ === 'wahl' ? WAHL_DAUER : ZAHL_DAUER);
       });
 
-      var nachFeldern = 700 + felder.length * 520 + 400;
+      var nachFeldern = t + 400;
 
       plane(function () {
         btn.classList.add('druck');
@@ -780,7 +845,12 @@
     }
 
     if (reduce) {
-      felder.forEach(function (f) { f.classList.add('da'); });
+      felder.forEach(function (el, i) {
+        var f = KALK_FELDER[i], w = el.querySelector('.kwert');
+        w.textContent = f.typ === 'wahl' ? f.o[f.w] : f.v;
+        w.classList.remove('leer');
+        el.classList.add('fertig');
+      });
       chips.forEach(function (c) { c.classList.add('da'); });
       zeilen.forEach(function (z) { z.classList.add('da'); });
       erg.classList.add('da');
