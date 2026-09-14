@@ -1,0 +1,23 @@
+# Nicht veröffentlichen – enthält interne Daten oder gehört nicht auf die Website
+
+# n8n-Workflow: echte Gmail-Adresse, Kalender-ID, Credential-IDs
+n8n/
+
+# Interne Notizen: Preisstrategie, offene Punkte
+README.md
+
+# Quelldateien für den Pinecone-Index – braucht die Website nicht
+wissensbasis/
+
+# Alte mehrseitige Fassung
+Verkünstelte Website/
+
+# Betriebssystem-Kram
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Lokales Werkzeug zum Einspielen der Wissensbasis, nicht Teil der Website
+upload_wissensbasis.py
+__pycache__/
+*.pyc

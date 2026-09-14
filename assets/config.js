@@ -1,196 +1,210 @@
-/* =============================================================================
-   KONFIGURATION  -  Die EINZIGE Datei, die pro Kunde angepasst werden muss.
-   -----------------------------------------------------------------------------
-   Alles zwischen den Anfuehrungszeichen austauschen, Datei speichern, fertig.
-   Leistungen/FAQ/Referenzen: Eintraege im Array kopieren, loeschen, umsortieren.
-   Bilder: eigene Fotos nach assets/img/ legen und den Pfad hier eintragen.
-   ============================================================================= */
+/* =========================================================================
+   Muster Handwerk – Demoseite für ASK Connect
+   Eine Datei für alle Inhalte. Für einen neuen Kunden nur hier anpassen.
 
-window.BETRIEB = {
+   ACHTUNG: Alle Preise, Zeiten und Terminarten hier stammen 1:1 aus der
+   Wissensbasis hinter dem Chat-Webhook (siehe wissensbasis/). Wer hier
+   etwas ändert, muss die Wissensbasis neu hochladen – sonst widerspricht
+   der Assistent der Seite, auf der er sitzt.
+   ========================================================================= */
 
-  /* --- 1. Firma ----------------------------------------------------------- */
-  firma: {
-    name:        "Muster Handwerk",                 // ANPASSEN
-    rechtsform:  "GmbH",
-    claim:       "Handwerk, auf das Sie sich verlassen können",
-    inhaber:     "Max Mustermann",
-    gegruendet:  1998,
-    logo:        "",   // optional: "assets/img/logo.png" - leer = Textlogo aus den Initialen
+window.SITE = {
+
+  /* --- Betrieb (Kulisse) ----------------------------------------------- */
+  betrieb: {
+    name:     'Muster Handwerk',
+    nameLang: 'Muster Handwerk GmbH',
+    claim:    'Ein Ansprechpartner. Alle Gewerke.',
+    seit:     2004
   },
 
-  /* --- 2. Farben ---------------------------------------------------------- */
-  design: {
-    primaer:    "#0f172a",   // Schwarzblau: Kopfzeile, dunkle Flaechen
-    akzent:     "#2563eb",   // Blau: Buttons, Highlights
-    akzentDark: "#1d4ed8",
-    akzentHell: "#eaf0fe",   // sehr helles Blau: Icon-Flaechen
-    akzentText: "#ffffff",   // Schrift auf blauen Buttons
-    hell:       "#f6f8fb",   // Seitenhintergrund der hellen Abschnitte
-    heroBild:   "assets/img/hero.svg",       // grosses Bild oben - durch Foto ersetzen
-    ueberBild:  "assets/img/werkstatt.svg",  // Bild im Abschnitt "Über uns"
-  },
-
-  /* --- 3. Kontakt --------------------------------------------------------- */
   kontakt: {
-    telefon:       "07431 123456",                  // ANPASSEN
-    telefonLink:   "+497431123456",                 // ohne Leerzeichen, mit +49
-    notdienst:     "0172 1234567",                  // leer lassen = kein Notdienst-Banner
-    notdienstLink: "+491721234567",
-    email:         "info@musterbetrieb.de",
-    strasse:       "Musterstraße 12",
-    plz:           "72458",
-    stadt:         "Musterstadt",
-    oeffnungszeiten: [
-      { tag: "Montag – Donnerstag", zeit: "07:00 – 17:00 Uhr" },
-      { tag: "Freitag",             zeit: "07:00 – 13:00 Uhr" },
-      { tag: "Samstag / Sonntag",   zeit: "geschlossen (Notdienst erreichbar)" },
-    ],
-    einsatzgebiet: "Musterstadt und Umkreis von 50 km",
+    strasse:     'Musterstraße 12',
+    plz:         '72458',
+    stadt:       'Musterstadt',
+    telefon:     '07431 987650',
+    telefonHref: '+497431987650',
+    notdienst:   '0172 1234567',
+    mail:        'info@musterhandwerk-demo.de'
   },
 
-  /* --- 4. Leistungen ------------------------------------------------------ *
-   * Bewusst allgemein gehalten - passt auf jedes Gewerk. Fuer den Kunden
-   * einfach Titel/Teaser/Punkte austauschen. Zu jeder Leistung sollte eine
-   * Markdown-Datei in /wissensbasis/ liegen, damit der Assistent antworten kann. */
+  zeiten: [
+    { tag: 'Mo – Do',   zeit: '07:00 – 17:00' },
+    { tag: 'Freitag',   zeit: '07:00 – 13:00' },
+    { tag: 'Sa & So',   zeit: 'Büro geschlossen', zu: true },
+    { tag: 'Notdienst', zeit: 'rund um die Uhr' }
+  ],
+
+  gebiet: 'Musterstadt und rund 50 km Umkreis – unter anderem Musterhausen, Musterdorf, Musterbach, Musterberg, Beispielstadt, Beispielheim, Beispieltal und Beispielau.',
+
+  /* --- Leistungen ------------------------------------------------------
+     frage = wird beim Klick auf den Ask-Knopf direkt an den Bot geschickt.
+     Maximal rund 35 Zeichen, sonst wird sie in der Karte abgeschnitten.
+     -------------------------------------------------------------------- */
   leistungen: [
-    {
-      icon: "werkzeug",
-      titel: "Reparatur & Wartung",
-      teaser: "Schnelle Hilfe, wenn etwas nicht mehr läuft – und regelmäßige Wartung, damit es gar nicht erst so weit kommt.",
-      punkte: ["Störungssuche und Instandsetzung", "Wartungsverträge mit festen Terminen", "Ersatzteile vom Lager", "Kurzfristige Termine"],
-      bild: "assets/img/leistung-1.svg",
-      datei: "wissensbasis/03a_leistung_beispiel_reparatur.md",
-    },
-    {
-      icon: "haus",
-      titel: "Sanierung & Modernisierung",
-      teaser: "Vom einzelnen Raum bis zum kompletten Objekt – geplant, sauber ausgeführt und termintreu übergeben.",
-      punkte: ["Beratung und Aufmaß vor Ort", "Festpreisangebot vor Beginn", "Koordination der Gewerke", "Abnahme mit Protokoll"],
-      bild: "assets/img/leistung-2.svg",
-      datei: "wissensbasis/03b_leistung_beispiel_sanierung.md",
-    },
-    {
-      icon: "plan",
-      titel: "Neubau & Montage",
-      teaser: "Neue Anlagen und Einbauten – fachgerecht montiert, dokumentiert und übergeben.",
-      punkte: ["Planung und Materialauswahl", "Montage nach aktueller Norm", "Inbetriebnahme und Einweisung", "Gewährleistung und Nachbetreuung"],
-      bild: "assets/img/leistung-3.svg",
-      datei: "wissensbasis/03c_leistung_beispiel_neubau.md",
-    },
-    // Weitere Leistung? Block oben kopieren und anpassen.
-    // Icons: werkzeug, haus, plan, wasser, flamme, blitz, pinsel, lift, baum
+    { id:'reparatur', titel:'Reparatur & Störung', icon:'wrench', bild:'sanitaer',
+      kurz:'Tropfender Hahn, klemmende Tür, Abfluss dicht – meist noch in derselben Woche.',
+      preis:'78 €/Std. netto',
+      frage:'Wann könnt ihr vorbeikommen?' },
+
+    { id:'heizung', titel:'Heizung & Wartung', icon:'flame', bild:'heizung',
+      kurz:'Wartung, Störungssuche und Austausch – auf Wunsch mit festem Wartungsvertrag.',
+      preis:'ab 180 €/Jahr',
+      frage:'Was kostet die Wartung?' },
+
+    { id:'bad', titel:'Bad & Sanitär', icon:'droplet', bild:'bad',
+      kurz:'Vom einzelnen Waschtisch bis zum kompletten Bad – Planung, Fliesen, Montage.',
+      preis:'nach Aufmaß',
+      frage:'Was kostet ein neues Bad?' },
+
+    { id:'elektro', titel:'Elektro & Wallbox', icon:'plug', bild:'elektro',
+      kurz:'Steckdosen, Verteiler, Beleuchtung – und die Wallbox für die Garage.',
+      preis:'nach Aufwand',
+      frage:'Bekomme ich eine Wallbox?' },
+
+    { id:'sanierung', titel:'Sanierung & Umbau', icon:'hammer', bild:'putz',
+      kurz:'Trockenbau, Boden, Türen, Maler. Wir koordinieren die Gewerke, nicht Sie.',
+      preis:'Aufmaß kostenfrei',
+      frage:'Termin für ein Aufmaß?' },
+
+    { id:'notdienst', titel:'Notdienst', icon:'alert', bild:'rohre',
+      kurz:'Wasseraustritt, Heizungsausfall im Winter, Gasgeruch – rund um die Uhr erreichbar.',
+      preis:'24/7 erreichbar',
+      frage:'Wasserrohrbruch – was tun?' }
   ],
 
-  /* --- 5. Ablauf (3 Schritte) --------------------------------------------- */
-  ablauf: [
-    { titel: "Anfrage stellen",  text: "Per Telefon, Formular oder direkt im Chat – rund um die Uhr." },
-    { titel: "Termin vor Ort",   text: "Wir schauen uns die Sache an und beraten Sie ehrlich." },
-    { titel: "Festpreisangebot", text: "Sie bekommen ein klares Angebot – ohne versteckte Kosten." },
-  ],
+  weitere: 'Außerdem: Planung und Koordination der beteiligten Gewerke · Neubau und Montage · barrierefreier Umbau · Prüfprotokoll nach jeder Wartung',
 
-  /* --- 6. Zahlen ---------------------------------------------------------- */
-  zahlen: [
-    { wert: "25+",    label: "Jahre Erfahrung" },
-    { wert: "24",     label: "Mitarbeiter" },
-    { wert: "1.800+", label: "abgeschlossene Aufträge" },
-    { wert: "48 h",   label: "Reaktionszeit auf Anfragen" },
-  ],
-
-  /* --- 7. Über uns -------------------------------------------------------- */
-  ueberUns: {
-    ueberschrift: "Ein Betrieb, viele Hände – und ein Anspruch",
-    text: "Wir sind ein inhabergeführter Handwerksbetrieb aus Musterstadt. Was wir zusagen, halten wir: " +
-          "feste Ansprechpartner, saubere Baustellen und Termine, auf die Sie sich einstellen können. " +
-          "Unsere Mitarbeiter bilden wir selbst aus – die meisten sind seit über zehn Jahren im Team.",
-    punkte: ["Meisterbetrieb mit eigener Ausbildung", "Feste Ansprechpartner statt Callcenter", "Transparente Preise vor Auftragsbeginn"],
-  },
-
-  /* --- 8. Referenzen ------------------------------------------------------ */
-  referenzen: [
-    { titel: "Sanierung Mehrfamilienhaus", text: "Komplette Modernisierung von acht Wohneinheiten im bewohnten Zustand – fertig in zwölf Wochen." },
-    { titel: "Wartung Gewerbeobjekt",      text: "Jährliche Wartung für einen Gewerbepark mit 14 Einheiten, inklusive Notdienst-Bereitschaft." },
-    { titel: "Neubau Einfamilienhaus",     text: "Komplette Ausführung unseres Gewerks vom Rohbau bis zur Übergabe an die Bauherren." },
-  ],
-
-  /* --- 9. Stimmen von Kunden ---------------------------------------------- */
-  stimmen: [
-    { text: "Termin gehalten, Preis gehalten, Baustelle sauber hinterlassen. Mehr muss man nicht sagen.", autor: "Familie K., Musterstadt" },
-    { text: "Wir hatten einen Schaden am Wochenende – zwei Stunden später stand jemand vor der Tür.", autor: "Hausverwaltung M." },
-  ],
-
-  /* --- 10. FAQ ------------------------------------------------------------ */
-  faq: [
-    { frage: "Wie schnell bekomme ich einen Termin?",
-      antwort: "Für Wartung und geplante Arbeiten in der Regel innerhalb von zwei Wochen, bei Störungen meist noch am selben oder nächsten Werktag." },
-    { frage: "Was kostet ein Termin vor Ort?",
-      antwort: "Die Erstberatung vor Ort ist bei uns kostenfrei, wenn daraus ein Angebot entsteht. Reine Reparatureinsätze rechnen wir nach Aufwand ab." },
-    { frage: "In welchem Umkreis sind Sie tätig?",
-      antwort: "In Musterstadt und im Umkreis von rund 50 km. Für größere Aufträge kommen wir auch weiter." },
-    { frage: "Kann ich den Termin auch abends anfragen?",
-      antwort: "Ja. Der Assistent auf dieser Seite nimmt Anfragen rund um die Uhr entgegen und trägt den Termin direkt in unseren Kalender ein." },
-  ],
-
-  /* --- 11. KI-Assistent (n8n) --------------------------------------------- *
-   * webhookUrl: aus dem n8n-Chat-Trigger kopieren (Production/Chat-URL).
-   * Solange sie leer ist, laeuft das Widget sichtbar im Demo-Modus.          */
+  /* --- Der Assistent (unser Produkt) ------------------------------------ */
   chat: {
-    webhookUrl:  "https://n8n-dev.askconnect.de/webhook/handwerk-website-chat/chat",
-    titel:       "Digitaler Assistent",
-    untertitel:  "Fragen & Termine – rund um die Uhr",
-    begruessung: "Guten Tag! Ich bin der digitale Assistent von Muster Handwerk. Ich beantworte Fragen zu unseren Leistungen und kann Ihnen direkt einen Termin einbuchen. Wie kann ich helfen?",
+    webhookUrl:  'https://n8n-dev.askconnect.de/webhook/handwerk-website-chat/chat',
+    titel:       'Handwerks-Assistent',
+    untertitel:  'Antwortet sofort · 24/7',
+    begruessung: 'Guten Tag! Ich bin der digitale Assistent von Muster Handwerk. Ich kenne unsere Leistungen, Stundensätze, Terminarten und den Betriebskalender – fragen Sie mich einfach, oder lassen Sie sich direkt einen Termin einbuchen.',
+    begruessungKurz: 'Guten Tag! Ich kenne Stundensätze, Terminarten und den Kalender – fragen Sie mich einfach.',
     vorschlaege: [
-      "Welche Leistungen bieten Sie an?",
-      "Ich brauche einen Termin vor Ort",
-      "Was kostet ein Einsatz?",
-    ],
-    launcherText: "Frage stellen",
+      'Was kostet die Wartung?',
+      'Termin für ein Aufmaß',
+      'Kommt ihr nach Musterbach?',
+      'Wasserrohrbruch – was tun?'
+    ]
   },
 
-  /* --- 11b. Testfälle für den Assistenten --------------------------------- *
-   * Drei Klick-Beispiele auf der Seite: ein Klick schickt die Frage direkt an
-   * den Assistenten. Gedacht für die Demo beim Kunden.
-   * aktiv: false  →  der ganze Abschnitt verschwindet (für die Live-Seite
-   * des Betriebs, wo Besucher keine "Testfälle" sehen sollen).              */
-  demo: {
-    aktiv: true,
-    ueberschrift: "Probieren Sie den Assistenten aus",
-    text: "Drei typische Situationen – ein Klick genügt, der Assistent antwortet sofort.",
-    faelle: [
-      {
-        icon: "frage",
-        titel: "Auskunft zur Leistung",
-        text: "Der Assistent antwortet nur aus der hinterlegten Wissensbasis – er erfindet nichts.",
-        frage: "Was genau gehört bei Ihnen zu Reparatur und Wartung, und was kostet ein Einsatz?",
-      },
-      {
-        icon: "kalender",
-        titel: "Termin buchen",
-        text: "Er fragt die nötigen Angaben ab, prüft den Kalender und trägt den Termin ein.",
-        frage: "Ich hätte gerne einen Termin zur Beratung vor Ort, am besten nächste Woche vormittags.",
-      },
-      {
-        icon: "warnung",
-        titel: "Notfall erkennen",
-        text: "Bei einem Notfall bucht er bewusst keinen Termin, sondern verweist auf den Notdienst.",
-        frage: "Bei mir läuft Wasser aus der Wand, was soll ich tun?",
-      },
-    ],
+  /* --- Was der Assistent kann (Abschnitt „In Aktion“) -------------------- */
+  funktionen: [
+    { icon:'clock',    titel:'Antwortet rund um die Uhr',
+      text:'Abends, am Wochenende, während alle auf der Baustelle sind – genau dann, wenn im Büro niemand ans Telefon geht.' },
+    { icon:'calendar', titel:'Bucht selbstständig Termine',
+      text:'Er kennt Ihre Terminarten samt Dauer – Aufmaß 60 Minuten, Störung 120 – prüft den Kalender und trägt verbindlich ein.' },
+    { icon:'phone',    titel:'Vergibt Rückruf-Zeitfenster',
+      text:'Gehört ein Anliegen ans Telefon, bietet er kurze Fenster an, zu denen Sie laut Kalender wirklich können.' },
+    { icon:'shield',   titel:'Erfindet keine Preise',
+      text:'Er antwortet nur aus Ihrer freigegebenen Wissensbasis. Für ein neues Bad nennt er keine Summe, sondern schlägt ein Aufmaß vor.' },
+    { icon:'database', titel:'Nimmt alles vollständig auf',
+      text:'Name, Telefon, Einsatzadresse, Anliegen – kein Zettel mehr, auf dem die Hausnummer fehlt.' },
+    { icon:'alert',    titel:'Erkennt Notfälle',
+      text:'Bei Wasseraustritt oder Gasgeruch bucht er nichts, sondern nennt sofort Ihre Notdienstnummer.' }
+  ],
+
+  /* --- Bilder (Unsplash-IDs, einzeln abgerufen und angesehen) ------------ */
+  bilder: {
+    hero:        'photo-1426927308491-6380b6a9936f',
+    meister:     'photo-1713652425093-47778c267769',
+    werkzeug:    'photo-1505495533616-ed5f6ce6d4f9',
+    sanitaer:    'photo-1676210134188-4c05dd172f89',
+    heizung:     'photo-1676210132787-7ed33de174d6',
+    heizkoerper: 'photo-1599028274511-e02a767949a3',
+    elektro:     'photo-1621905251189-08b45d6a269e',
+    bad:         'photo-1763485956310-55f3c0e822d5',
+    putz:        'photo-1768839725085-829e6ac7ac26',
+    rohbau:      'photo-1768321901750-f7b96d774456',
+    baustelle:   'photo-1694521787799-ad4ad241cb39',
+    holz:        'photo-1687422810663-c316494f725a',
+    dach:        'photo-1780445392484-5fb7d5610708',
+    rohre:       'photo-1748442001865-5583ec02ae22',
+    abend:       'photo-1776222075392-f84395eff09c'
   },
 
-  /* --- 12. Kontaktformular ------------------------------------------------ *
-   * Ohne eigenen Endpunkt oeffnet das Formular eine vorbereitete E-Mail.
-   * Alternativ: n8n-Webhook-URL eintragen.                                   */
-  formular: {
-    endpunkt: "",   // z. B. "https://n8n.deinedomain.de/webhook/kontakt"
+  /* --- Anbieter --------------------------------------------------------- */
+  anbieter: {
+    name:  'ASK Connect',
+    claim: 'KI-Assistenten für Handwerksbetriebe',
+    mail:  'info@askconnect.de'
   },
 
-  /* --- 13. Rechtliches ---------------------------------------------------- */
-  rechtliches: {
-    handelsregister:   "HRB 000000, Amtsgericht Musterstadt",
-    ustId:             "DE000000000",
-    geschaeftsfuehrer: "Max Mustermann",
-    aufsichtsbehoerde: "Handwerkskammer Musterstadt",
-    instagram:         "",   // z. B. "https://instagram.com/musterbetrieb"
-    facebook:          "",
-  },
+  /* --- Pakete -----------------------------------------------------------
+     Vier eigenständige Angebote, keine Stufenleiter.
+     spanne = einmalige Einrichtung · monat = laufender Betrieb
+     -------------------------------------------------------------------- */
+  pakete: [
+    {
+      name:   'Social-Media-Autopilot',
+      fuer:   'Nur Marketing – auch ohne Assistent buchbar.',
+      spanne: '399 – 599 €',
+      monat:  '34,99 €',
+      top:    false,
+      punkte: [
+        'Beiträge für Instagram und Facebook',
+        'Vorher-nachher vom Bad, ohne Textarbeit',
+        'Ein Foto von der Baustelle genügt',
+        'Freigabe vor jeder Veröffentlichung'
+      ]
+    },
+    {
+      name:   'Website-Assistent',
+      fuer:   'Der Einstieg: Fragen und Termine auf Ihrer Seite.',
+      spanne: '399 – 599 €',
+      monat:  '39,99 €',
+      top:    false,
+      punkte: [
+        'Assistent in Ihrem Erscheinungsbild',
+        'Antworten nur aus Ihrer Wissensbasis',
+        'Termine direkt in Google Kalender',
+        'Wahlweise nur Rückruf-Zeitfenster'
+      ]
+    },
+    {
+      name:   'Assistent + WhatsApp',
+      fuer:   'Erreichbar auf dem Kanal, den Ihre Kunden nutzen.',
+      spanne: '699 – 999 €',
+      monat:  '49,99 €',
+      top:    true,
+      punkte: [
+        'Alles aus dem Website-Assistenten',
+        'Ihre Büronummer wird angebunden',
+        'Erinnerung an Wartung und Prüftermine',
+        'Terminerinnerung am Vortag'
+      ]
+    },
+    {
+      name:   'All-in',
+      fuer:   'Alles zusammen – Anfragen und Marketing.',
+      spanne: '1.099 – 1.399 €',
+      monat:  '69,99 €',
+      top:    false,
+      punkte: [
+        'Alles aus „Assistent + WhatsApp“',
+        'Plus kompletter Social-Media-Autopilot',
+        'Günstiger als beide Pakete einzeln',
+        'Quartalsgespräch zur Feinjustierung'
+      ]
+    }
+  ],
+
+  /* --- Ablauf der Zusammenarbeit ---------------------------------------- */
+  ablauf: [
+    { titel:'Kostenloses Erstgespräch',
+      text:'20 bis 30 Minuten am Telefon oder bei Ihnen im Büro. Sie erzählen, wie Anfragen hereinkommen und was am meisten Zeit frisst. Danach wissen Sie, ob sich das für Ihren Betrieb lohnt – unverbindlich und ohne Kosten.' },
+    { titel:'Wir schauen uns Ihren Alltag an',
+      text:'Welche Fragen kommen jeden Tag? Wie viele Anrufe gehen verloren, während alle auf der Baustelle sind? Wir suchen die zwei, drei Stellen mit dem größten Hebel – statt Ihren ganzen Betrieb umzukrempeln.' },
+    { titel:'Sie bekommen ein festes Angebot',
+      text:'Ein Vorschlag mit klarem Umfang, festem Preis und benannten laufenden Kosten. Keine Stundenzettel, keine Überraschungen auf der Rechnung.' },
+    { titel:'Wir richten alles ein',
+      text:'Wir sammeln Ihre Unterlagen ein – Stundensätze, Terminarten, Einsatzgebiet, häufige Fragen –, bauen den Assistenten und binden ihn in Ihre Website ein. Ihr Aufwand: ein bis zwei Termine, den Rest machen wir.' },
+    { titel:'Zwei Wochen testen – das Risiko liegt bei uns',
+      hervor: true,
+      text:'Sie und Ihr Team probieren alles in Ruhe aus und sagen uns, wo die Antworten noch nicht passen. Überzeugt es Sie nicht, geben Sie es zurück – vom Einrichtungspreis zahlen Sie dann keinen Cent. Offen bleiben nur die Kosten, die im Testbetrieb wirklich angefallen sind, etwa für Hosting und KI-Nutzung.' },
+    { titel:'Wir bleiben erreichbar',
+      text:'Nach dem Start schauen wir gemeinsam, was gut läuft und was noch fehlt. Wenn etwas hakt, sind wir kurzfristig für Sie da – und erweitern die Lösung, wenn Ihr Betrieb wächst.' }
+  ]
 };

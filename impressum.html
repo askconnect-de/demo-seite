@@ -1,72 +1,83 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Impressum</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="icon" href="data:,">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum – Muster Handwerk (Demo)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F172A'/><path d='M60 24l16 16-12 12-16-16z' fill='%232563EB'/><path d='M52 44 24 72a8 8 0 0 0 11 11l28-28z' fill='%232563EB'/><path d='M46 20 66 40' stroke='%232563EB' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .rechtstext{ max-width:74ch; padding-block:clamp(34px,6vw,64px); }
+  .rechtstext h1{ font-size:clamp(1.9rem,5vw,2.6rem); margin-bottom:.5em; }
+  .rechtstext h2{ font-size:clamp(1.1rem,2.6vw,1.3rem); margin-top:1.9em; }
+  .rechtstext p{ margin:0 0 1em; }
+  .rechtstext a{ color:var(--ac6); }
+  .zurueck{ display:inline-flex; align-items:center; gap:8px; font-weight:600;
+            font-size:.9rem; color:var(--ac6); text-decoration:none; }
+</style>
 </head>
 <body>
 
-<header class="kopf">
-  <div class="wrap kopf__inhalt">
-    <a class="logo" href="index.html">
-      <span class="logo__mark">MH</span>
-      <span data-cfg="firma.name">Muster Handwerk</span>
-    </a>
-    <nav class="nav" id="nav"><a href="index.html">Zurück zur Startseite</a></nav>
-  </div>
-</header>
+<div class="demobar">
+  <b>Demo-Website</b><span class="dbfull"> · Der Betrieb ist erfunden.</span>
+  <span class="pin"></span>Erstellt von <b>ASK Connect</b>.
+</div>
 
 <main class="wrap rechtstext">
+  <a class="zurueck" href="index.html">← Zurück zur Startseite</a>
   <h1>Impressum</h1>
-  <p><em>Platzhalter – vor Veröffentlichung durch die Angaben des Betriebs ersetzen und rechtlich prüfen lassen.</em></p>
+  <p><em>Platzhalter für einen fiktiven Demobetrieb. Vor einer echten Veröffentlichung
+    durch die Angaben des Betriebs ersetzen und rechtlich prüfen lassen.</em></p>
 
   <h2>Angaben gemäß § 5 DDG</h2>
   <p>
-    <span data-cfg="firma.name"></span> <span data-cfg="firma.rechtsform"></span><br>
-    <span data-cfg="kontakt.strasse"></span><br>
-    <span data-cfg="kontakt.plz"></span> <span data-cfg="kontakt.stadt"></span>
+    Muster Handwerk GmbH<br>
+    Musterstraße 12<br>
+    72458 Musterstadt
   </p>
 
   <h2>Vertreten durch</h2>
-  <p data-cfg="rechtliches.geschaeftsfuehrer"></p>
+  <p>Geschäftsführer: Andreas Bauer, Installateur- und Heizungsbaumeister</p>
 
   <h2>Kontakt</h2>
   <p>
-    Telefon: <a href="#" data-tel><span data-cfg="kontakt.telefon"></span></a><br>
-    E-Mail: <a href="#" data-mail><span data-cfg="kontakt.email"></span></a>
+    Telefon: 07431 987650<br>
+    Notdienst: 0172 1234567<br>
+    E-Mail: info@musterhandwerk-demo.de
   </p>
 
   <h2>Registereintrag</h2>
-  <p data-cfg="rechtliches.handelsregister"></p>
+  <p>Handelsregister: Amtsgericht Musterstadt, HRB 00000 <em>(Platzhalter)</em></p>
 
   <h2>Umsatzsteuer-Identifikationsnummer</h2>
-  <p data-cfg="rechtliches.ustId"></p>
+  <p>DE000000000 <em>(Platzhalter)</em></p>
 
-  <h2>Zuständige Aufsichtsbehörde / Kammer</h2>
-  <p data-cfg="rechtliches.aufsichtsbehoerde"></p>
-  <p>Berufsbezeichnung und berufsrechtliche Regelungen: Handwerksordnung (HwO), verliehen in
-    der Bundesrepublik Deutschland. <em>(Angaben je Gewerk ergänzen.)</em></p>
+  <h2>Zuständige Kammer</h2>
+  <p>Handwerkskammer Musterstadt <em>(Platzhalter)</em></p>
+  <p>Berufsbezeichnung und berufsrechtliche Regelungen: Handwerksordnung (HwO),
+    verliehen in der Bundesrepublik Deutschland. <em>(Angaben je Gewerk ergänzen.)</em></p>
 
   <h2>Streitschlichtung</h2>
   <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
     Verbraucherschlichtungsstelle teilzunehmen.</p>
 
   <h2>Haftung für Inhalte und Links</h2>
-  <p>Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
-    verantwortlich. Für Inhalte externer Links sind die jeweiligen Anbieter verantwortlich.</p>
+  <p>Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den
+    allgemeinen Gesetzen verantwortlich. Für Inhalte externer Links sind die
+    jeweiligen Anbieter verantwortlich.</p>
 </main>
 
-<footer class="fuss">
-  <div class="wrap fuss__unten">
-    <span>© <span data-jahr></span> <span data-cfg="firma.name"></span></span>
-    <span><a href="datenschutz.html">Datenschutz</a></span>
+<footer class="foot">
+  <div class="wrap footin">
+    <span>© <span id="jahr">2026</span> Muster Handwerk GmbH · fiktiver Demobetrieb</span>
+    <span><a href="datenschutz.html">Datenschutz</a> · <a href="index.html">Startseite</a></span>
   </div>
 </footer>
 
-<script src="assets/config.js"></script>
-<script src="assets/app.js"></script>
+<script>document.getElementById('jahr').textContent = new Date().getFullYear();</script>
 </body>
 </html>
