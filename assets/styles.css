@@ -880,7 +880,7 @@ body.plain .asklabel{ display:none; }
   display:flex; gap:16px; align-items:flex-start;
   background:rgba(37,99,235,.10); border:1.5px solid rgba(37,99,235,.42);
   border-radius:var(--rl); padding:20px 22px;
-  margin:clamp(34px,4vw,48px) 0 clamp(38px,5vw,58px);
+  margin:0 0 clamp(38px,5vw,58px);
 }
 .testbanner-ic{
   width:42px; height:42px; border-radius:11px; background:var(--ac);
@@ -1480,4 +1480,36 @@ body.plain .asklabel{ display:none; }
            font-size:.625rem; letter-spacing:.07em; }
   .kiflag span, .kiflag{ overflow:hidden; text-overflow:ellipsis; }
   .kiflag.rechts{ left:12px; }
+}
+
+/* =========================================================================
+   Zweiter Hinweiskasten: „Das hier ist nur ein Ausschnitt"
+   Gleiche Bauform wie der Testkasten, aber anderer Ton – damit die zwei
+   Botschaften (Umfang erweitern / Risiko nehmen) nicht ineinanderlaufen.
+   In der Kfz-Fassung ist dieser Kasten blau; hier ist Blau die Akzentfarbe
+   und schon vom Testkasten belegt. Also Bernstein – derselbe Ton wie der
+   Rueckruf-Eintrag im Kalender.
+   ========================================================================= */
+.mehrbanner{
+  display:flex; gap:16px; align-items:flex-start;
+  background:rgba(217,119,6,.10); border:1.5px solid rgba(217,119,6,.42);
+  border-radius:var(--rl); padding:20px 22px;
+  margin:clamp(34px,4vw,48px) 0 16px;   /* der Testkasten folgt direkt */
+}
+.mehrbanner-ic{
+  width:42px; height:42px; border-radius:11px; background:#D97706;
+  display:grid; place-items:center; flex:none;
+}
+.mehrbanner .mehrbanner-ic{ display:grid; place-items:center; }
+.mehrbanner-ic svg{ width:22px; height:22px; color:#fff; }
+.mehrbanner b{ display:block; color:#fff; font-size:1.05rem; margin-bottom:4px; }
+.mehrbanner span{ display:block; font-size:.92rem; color:#C3CCD9; }
+/* Zwei Klassen, damit .mehrbanner b{display:block} das verschachtelte <b>
+   nicht zum Block macht und den Satz zerreisst – siehe fallstricke.md */
+.mehrbanner .mb-stark{ display:inline; color:#fff; font-weight:700; font-size:inherit; margin:0; }
+
+@media (max-width:620px){
+  .mehrbanner{ padding:17px 16px; gap:13px; }
+  .mehrbanner b{ font-size:1rem; }
+  .mehrbanner span{ font-size:.87rem; }
 }
