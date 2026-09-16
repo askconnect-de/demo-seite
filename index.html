@@ -530,6 +530,57 @@
           Erst den Assistenten testen
         </button>
       </div>
+
+      <!-- ═══════════ Terminbuchung ASK CONNECT (Beginn) ═══════════
+           Der Kalender laeuft in einem iframe von cal.askconnect.de und ist
+           ueber assets/styles.css nicht erreichbar. Die Farben unten sind
+           deshalb als cssVarsPerTheme hinterlegt und entsprechen der Palette
+           dieser Demo (--ink2 als Flaeche, --ac als Akzent), umgerechnet in
+           deckende Hex-Werte: halbtransparente Angaben nimmt Cal.com nicht
+           zuverlaessig an. -->
+      <div class="calbox">
+        <b class="calbox-t">Oder suchen Sie sich gleich einen Termin aus</b>
+        <div class="calembed" id="cal-erstgespraech"></div>
+      </div>
+      <script type="text/javascript">
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://cal.askconnect.de/embed/embed.js", "init");
+        Cal("init", "erstgesprach", { origin: "https://cal.askconnect.de" });
+
+        Cal.ns.erstgesprach("inline", {
+          elementOrSelector: "#cal-erstgespraech",
+          config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true" },
+          calLink: "alexander/erstgesprach",
+        });
+
+        Cal.ns.erstgesprach("ui", {
+          hideEventTypeDetails: false,
+          layout: "month_view",
+          theme: "dark",
+          cssVarsPerTheme: {
+            dark: {
+              "cal-bg": "#16202e",
+              "cal-bg-subtle": "#121b27",
+              "cal-bg-muted": "#101824",
+              "cal-bg-emphasis": "#243244",
+              "cal-bg-inverted": "#ffffff",
+              "cal-border": "#2a3a4e",
+              "cal-border-subtle": "#1f2c3c",
+              "cal-border-emphasis": "#405269",
+              "cal-border-booker": "#2a3a4e",
+              "cal-text": "#e8edf3",
+              "cal-text-emphasis": "#ffffff",
+              "cal-text-subtle": "#a9b4c2",
+              "cal-text-muted": "#8791a1",
+              "cal-text-inverted": "#0f172a",
+              "cal-brand": "#2563eb",
+              "cal-brand-emphasis": "#1d4ed8",
+              "cal-brand-text": "#ffffff"
+            },
+            light: { "cal-brand": "#2563eb", "cal-brand-text": "#ffffff" }
+          },
+        });
+      </script>
+      <!-- ═══════════ Terminbuchung ASK CONNECT (Ende) ═══════════ -->
       <p class="small" style="margin-top:22px;color:#7E8998">
         Muster Handwerk ist ein fiktiver Beispielbetrieb. Zahlen zu Erreichbarkeit und
         Rückgewinnung sind Erfahrungswerte aus dem Handwerk, keine Garantie.

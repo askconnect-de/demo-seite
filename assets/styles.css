@@ -1533,3 +1533,19 @@ body.plain .asklabel{ display:none; }
 @media (max-width:560px){
   .dblinks a{ padding:2px 8px; }
 }
+
+/* ═══════════ Terminbuchung (Cal.com) ═══════════
+   Nur der Rahmen: Der Kalender selbst liegt in einem iframe und wird ueber
+   cssVarsPerTheme am Einbettungscode in index.html eingefaerbt.
+   Keine feste Hoehe und kein overflow:scroll - Cal.com meldet seine Hoehe
+   selbst, eine zweite Scrollleiste waere nur stoerend. */
+.calbox{
+  max-width:940px; margin:30px auto 0; background:var(--ink2);
+  border:1px solid #2A3A4E; border-radius:var(--rl); padding:14px;
+}
+.calbox-t{ display:block; color:#fff; text-align:center; margin:4px 0 12px; font-size:1.02rem; }
+.calembed{ width:100%; min-height:700px; }
+@media (max-width:560px){
+  .calbox{ padding:8px; border-radius:var(--r); margin-top:22px; }
+  .calembed{ min-height:620px; }
+}
