@@ -524,7 +524,17 @@
         gern in Ihrem Betrieb vorbei</b> – auch dann kostenlos und unverbindlich.
       </p>
       <div class="brow" style="justify-content:center">
-        <a class="btn b-pri b-lg" href="#" data-mailto>Gespräch vereinbaren</a>
+        <!-- Oeffnet den Kalender als Overlay. Namespace und Farben werden weiter
+             unten in diesem Abschnitt initialisiert, deshalb genuegen hier die
+             data-Attribute. Als <button>, damit der Klick nicht zusaetzlich an
+             den Seitenanfang springt.
+             Wer lieber schreibt, findet die Adresse in der Fusszeile. -->
+        <button class="btn b-pri b-lg" type="button"
+                data-cal-link="alexander/erstgesprach"
+                data-cal-namespace="erstgesprach"
+                data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>
+          Gespräch vereinbaren
+        </button>
         <button class="btn b-lig b-lg" type="button"
                 data-frage="Ich habe selbst einen Handwerksbetrieb. Was genau bekomme ich bei euch?">
           Erst den Assistenten testen
